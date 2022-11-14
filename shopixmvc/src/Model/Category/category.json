@@ -1,0 +1,17 @@
+[
+  {
+    "id": "1",
+    "name": "T-SHIRT",
+    "designation": "Qualitativ hochwertig"
+  },
+  {
+    "id": "2",
+    "name": "Jacken",
+    "designation": "100% Baumwolle"
+  },
+  {
+    "id": "3",
+    "name": "Hosen",
+    "designation": "Elastisch"
+  }
+]

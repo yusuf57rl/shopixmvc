@@ -1,0 +1,180 @@
+/* CSS Y.S */
+
+.space {
+    height: 30px;
+    width: 100%;
+    background: transparent;
+    padding: 20px;
+    border: 4px solid transparent;
+}
+
+.buttons {
+    height: 100px;
+    width: auto;
+    margin-top: -100px;
+    margin-left: -150px;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    border: green 48px dashed;
+}
+
+h1 {
+    color: #e3dddd;
+    font-family: 'Trocchi', serif;
+    font-size: 40px;
+    font-weight: normal;
+    line-height: 50px;
+    margin: 0;
+}
+
+h2 {
+    color: #69a9a2;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 30px;
+    margin: 16px 2px 24px;
+}
+* {margin: 0; padding: 0;}
+body {background: black;}
+canvas {display: block;}
+.subheader {
+    font-size: 26px;
+    font-weight: 300;
+    color: #4485ad;
+    margin: 0 0 24px;
+}
+
+p {
+    color: #4c4a37;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    line-height: 32px;
+    margin: 0 0 24px;
+}
+
+a {
+    color: #f1f3f2;
+    background: transparent;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #c5a8e5
+}
+
+
+.copyright {
+    color: #fcf6f6;
+    margin-block: auto;
+}
+
+/*.background {
+
+    background-image: url("../img/entspannt.png");
+    filter: blur(12px);
+    -webkit-filter: blur(12px);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+*/
+
+.buttonzsm{
+    width: 216px;
+    margin: 0px auto
+}
+.button-3 {
+    appearance: none;
+    background-color: rgba(11, 103, 32, 0.62);
+    border: 4px solid rgba(27, 31, 35, .15);
+    border-radius: 11px;
+    box-shadow: rgba(27, 31, 35, .1) 0 5px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 15px;
+    padding: 7px 20px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.button-3:focus:not(:focus-visible):not(.focus-visible) {
+    box-shadow: none;
+    outline: none;
+}
+
+.button-3:hover {
+    background-color: #388d25;
+}
+
+.button-3:focus {
+    box-shadow: rgba(46, 70, 164, 0.4) 0 0 0 4px;
+    outline: none;
+}
+
+.button-3:disabled {
+    background-color: #4070bb;
+    border-color: rgba(27, 31, 35, .1);
+    color: rgba(255, 255, 255, .8);
+    cursor: default;
+}
+
+.button-3:active {
+    background-color: #29318e;
+    box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+}
+
+
+.cursor {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: 1px solid #50b250;
+    transition: all 200ms ease-out;
+    position: fixed;
+    pointer-events: none;
+    left: 0;
+    top: 0;
+    transform: translate(calc(-50% + 15px), -50%);
+}
+
+.cursor2 {
+    width: 15px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: #25a43b;
+    opacity: .3;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: width .3s, height .3s, opacity .3s;
+}
+
+.hover {
+    background-color: #ffffff;
+    opacity: 0.5;
+}
+
+.cursorinnerhover {
+    width: 50px;
+    height: 50px;
+    opacity: .5;
+}
+
+/*
+ 13.09.22 | Y.S
+ */

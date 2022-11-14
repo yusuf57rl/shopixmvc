@@ -1,0 +1,57 @@
+[
+  {
+    "id": "1",
+    "name": "Alpha T-Shirt",
+    "categoryid": 1,
+    "price": 20.00
+  },
+  {
+    "id": "2",
+    "name": "Gucci T-Shirt",
+    "categoryid": 1,
+    "price": 109.99
+  },
+  {
+    "id": "3",
+    "name": "DSQUARED2 T-Shirt",
+    "categoryid": 1,
+    "price": 100.24
+  },
+  {
+    "id": "4",
+    "name": "Alpha Jacke",
+    "categoryid": 2,
+    "price": 200.00
+  },
+  {
+    "id": "5",
+    "name": "Wellensteyn Jacke",
+    "categoryid": 2,
+    "price": 302.49
+  },
+  {
+    "id": "6",
+    "name": "Adidas Jacke",
+    "categoryid": 2,
+    "price": 140.24
+  },
+  {
+    "id": "7",
+    "name": "Diesel Hose",
+    "categoryid": 3,
+    "price": 42.04
+  },
+  {
+    "id": "8",
+    "name": "Brax Hose",
+    "categoryid": 3,
+    "price": 59.62
+  },
+  {
+    "id": "9",
+    "name": "Mr Marvis Hosen",
+    "categoryid": 3,
+    "price": 94.12
+  }
+
+]
