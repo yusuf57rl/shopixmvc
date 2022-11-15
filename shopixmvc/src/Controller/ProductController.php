@@ -1,29 +1,20 @@
 <?php
 
-namespace App\Model\Category;
+namespace App\Controller;
 
-class products
+use App\Model\Product\ProductRepository;
+
+class ProductController
 {
-
-
-    public function getAllProducts(): array
+    public function __construct(private ProductRepository $productRepository)
     {
-        $rawProducts = file_get_contents(__DIR__ . "/../daten/products.json");
-        $products = $rawProducts;
-        $decodedProducts = html_entity_decode($products);
-        $decodedText2 = $decodedProducts;
-
-        return json_decode($decodedText2, true, 512, JSON_THROW_ON_ERROR);
     }
 
-    public function getProductsByCategoryId(int $categoryId, $products): array
+    public function load(): void
     {
-        $allProducts = $this->getAllProducts();
-        if($products["id"] === $categoryId){
-            return $products;
-        }
+        $productId = $_GET['id'] ?? '';
 
-
+       $product = $this->productRepository->findByProductId($productId);
+        require __DIR__ . "/../View/Product.view.php";
     }
-
 }

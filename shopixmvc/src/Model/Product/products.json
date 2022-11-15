@@ -2,55 +2,64 @@
   {
     "id": "1",
     "name": "Alpha T-Shirt",
-    "categoryid": 1,
+    "categoryid": "1",
+    "description": "Alpha T-Shirt Qualität",
     "price": 20.00
   },
   {
     "id": "2",
     "name": "Gucci T-Shirt",
-    "categoryid": 1,
+    "categoryid": "1",
+    "description": "Gucci T-Shirt Qualität",
     "price": 109.99
   },
   {
     "id": "3",
     "name": "DSQUARED2 T-Shirt",
-    "categoryid": 1,
+    "categoryid": "1",
+    "description": "DSQUARED2 T-Shirt Qualität",
     "price": 100.24
   },
   {
     "id": "4",
     "name": "Alpha Jacke",
-    "categoryid": 2,
+    "categoryid": "2",
+    "description": "Alpha Jacke Qualität",
     "price": 200.00
   },
   {
     "id": "5",
     "name": "Wellensteyn Jacke",
-    "categoryid": 2,
+    "categoryid": "2",
+    "description": "Wellensteyn Jacke Qualität",
     "price": 302.49
   },
   {
     "id": "6",
     "name": "Adidas Jacke",
-    "categoryid": 2,
+    "categoryid": "2",
+    "description": "Adidas Jacke Qualität",
     "price": 140.24
   },
   {
     "id": "7",
     "name": "Diesel Hose",
-    "categoryid": 3,
+    "categoryid": "3",
+    "description": "Diesel Hose Qualität",
     "price": 42.04
   },
   {
     "id": "8",
     "name": "Brax Hose",
-    "categoryid": 3,
+    "categoryid": "3",
+    "description": "Brax Hose Qualität",
     "price": 59.62
   },
   {
     "id": "9",
     "name": "Mr Marvis Hosen",
-    "categoryid": 3,
+    "categoryid": "3",
+    "description": "Mrs Marvis Hosen Qualität",
     "price": 94.12
   }
 

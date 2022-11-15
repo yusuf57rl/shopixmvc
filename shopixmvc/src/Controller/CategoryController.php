@@ -2,15 +2,21 @@
 
 namespace App\Controller;
 
-new \App\Model\Category\CategoryModel();
-
+use App\Model\Product\ProductRepository;
 
 class CategoryController
 {
-
-    public function clothes(): array
+    public function __construct(private ProductRepository $productModel)
     {
-        require_once __DIR__ . '../Model/Category/CategoryModel.php';
+    }
+
+    public function load(): void
+    {
+        $categoryId = $_GET['id'] ?? '';
+
+        $products = $this->productModel->findByCategoryId($categoryId);
+
+        require __DIR__ . '/../View/Category.view.php';
 
     }
 }
