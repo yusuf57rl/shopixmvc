@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Model\Category\CategoryRepository;
 use Smarty;
+use App\core\addTemplateParameterClass;
 
 class CategoriesController
 {
@@ -12,11 +13,9 @@ class CategoriesController
     {
     }
 
-    public function load(): void
+    public function load($categories2)
     {
-        $categories = $this->categoryRepository->findAll();
-        $smarty = new Smarty;
-        $smarty->assign('categories', $categories);
-        $smarty->display('HomeView.tpl');
+        $categories2 = $this->categoryRepository->findAll();
+
     }
 }
