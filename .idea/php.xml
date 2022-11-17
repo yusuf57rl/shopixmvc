@@ -3,6 +3,7 @@
   <component name="PhpIncludePathManager">
     <include_path>
       <path value="$PROJECT_DIR$/shopixmvc/vendor/composer" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/smarty/smarty" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1">
