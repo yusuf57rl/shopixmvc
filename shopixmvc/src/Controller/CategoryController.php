@@ -6,7 +6,7 @@ use App\Model\Product\ProductRepository;
 
 class CategoryController
 {
-    public function __construct(private ProductRepository $productModel)
+    public function __construct(private ProductRepository $productModel,  private View $view)
     {
     }
 
@@ -16,7 +16,7 @@ class CategoryController
 
         $products = $this->productModel->findByCategoryId($categoryId);
 
-        require __DIR__ . '/../View/Category.view.php';
-
+        $this->view->addTemplateParameter('products', $products);
+        $this->view->setTemplate('CategoryView.tpl');
     }
 }

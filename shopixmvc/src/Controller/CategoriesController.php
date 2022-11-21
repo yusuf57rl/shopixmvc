@@ -4,18 +4,18 @@ namespace App\Controller;
 
 
 use App\Model\Category\CategoryRepository;
-use Smarty;
-use App\core\addTemplateParameterClass;
 
 class CategoriesController
 {
-    public function __construct(private CategoryRepository $categoryRepository)
+    public function __construct(private CategoryRepository $categoryRepository,  private View $view)
     {
     }
 
     public function load($categories2)
     {
-        $categories2 = $this->categoryRepository->findAll();
+        $categories = $this->categoryRepository->findAll();
 
+        $this->view->addTemplateParameter('categories', $categories);
+        $this->view->setTemplate('HomeView.tpl');
     }
 }

@@ -17,6 +17,6 @@ if ($page === 'category') {
     $products = new \App\Controller\ProductController($productRepo);
     $products->load();
 } else {
-    $category = new \App\core\view();
-    $category->addTemplateParameter();
+    $home = new \App\Controller\CategoriesController($categoryRepo, $view);
+    $home->load();
 }
