@@ -2,7 +2,6 @@
 <project version="4">
   <component name="PhpIncludePathManager">
     <include_path>
-      <path value="$PROJECT_DIR$/shopixmvc/vendor/composer" />
       <path value="$PROJECT_DIR$/shopixmvc/vendor/smarty/smarty" />
     </include_path>
   </component>
