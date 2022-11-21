@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Core\View;
 use App\Model\Product\ProductRepository;
 
 class CategoryController

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Core\View;
 use App\Model\Category\CategoryRepository;
 
 class CategoriesController
@@ -11,7 +12,7 @@ class CategoriesController
     {
     }
 
-    public function load($categories2)
+    public function load()
     {
         $categories = $this->categoryRepository->findAll();
 
