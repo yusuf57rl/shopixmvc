@@ -36,7 +36,7 @@
 </section>
 
 
-<p class="copyright"><strong>&nbsp; &copy; P. Hermes &nbsp; - &nbsp;</strong> <a href="#">Impressum &nbsp;</a> | <a
+<p class="copyright"><strong>&nbsp; &copy; Y.Senel &nbsp; - &nbsp;</strong> <a href="#">Impressum &nbsp;</a> | <a
             href="#">&nbsp; Datenschutzerklärung</a> | <a href="#">&nbsp; AGB</a></p>
 
 <div class="cursor"></div>
