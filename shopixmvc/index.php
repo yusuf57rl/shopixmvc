@@ -13,7 +13,7 @@ $categoryRepo = new \App\Model\Category\CategoryRepository();
 $provider = new Provider();
 $productRepo = new \App\Controller\ControllerProvider();
 
-//$page = $_GET['page'] ?? '';
+$page = $_GET['page'] ?? '';
 
 //if ($page === 'category') {
 //    $category = new \App\Controller\CategoryController($productRepo, $view);
@@ -31,7 +31,7 @@ $productRepo = new \App\Controller\ControllerProvider();
 $controller = null;
 $list = null;
 foreach ($list as $key => $controllerClass) {
-    if ($key === $_GET['page'] ) {
+    if ($key === $page ) {
         $controller = new $controllerClass;
     }
 }
