@@ -3,13 +3,19 @@
 namespace App\Controller;
 
 
+use App\Core\Container;
 use App\Core\View;
 use App\Model\Category\CategoryRepository;
 
 class CategoriesController
 {
-    public function __construct(private CategoryRepository $categoryRepository,  private View $view)
+    private View $view;
+    private CategoryRepository $categoryRepository;
+
+    public function __construct(Container $container)
     {
+        $this->view = $container->get(View::class);
+        $this->categoryRepository = $container->get(CategoryRepository::class);
     }
 
     public function load()
@@ -18,5 +24,6 @@ class CategoriesController
 
         $this->view->addTemplateParameter('categories', $categories);
         $this->view->setTemplate('HomeView.tpl');
+        $this->view->display();
     }
 }

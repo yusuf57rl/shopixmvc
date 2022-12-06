@@ -4,16 +4,13 @@ declare(strict_types=1);
 
 require __DIR__ . "/vendor/autoload.php";
 
-use App\Core\View;
+$container = new \App\Core\Container();
 
-$view = new View(new Smarty());
-$productRepo = new \App\Model\Product\ProductRepository();
-$categoryRepo = new \App\Model\Category\CategoryRepository();
+$dependencyprovider = new \App\Core\DependencyProvider();
+$dependencyprovider->provide($container);
 
-$provider = new Provider();
-$productRepo = new \App\Controller\ControllerProvider();
-
-$page = $_GET['page'] ?? '';
+$provider = new \App\Core\ControllerProvider();
+$page = $_GET["page"] ?? "";
 
 //if ($page === 'category') {
 //    $category = new \App\Controller\CategoryController($productRepo, $view);
@@ -28,12 +25,14 @@ $page = $_GET['page'] ?? '';
 //
 //$view->display();
 
-$controller = null;
-$list = null;
-foreach ($list as $key => $controllerClass) {
-    if ($key === $page ) {
-        $controller = new $controllerClass;
+$controller = new \App\Controller\CategoryController($container);
+
+foreach ($provider->getList() as $key => $controllerClass) {
+    if ($key == $page ) {
+        $controller = new $controllerClass($container);
+    break;
     }
 }
 
-$controller->display();
+
+$controller->load();
