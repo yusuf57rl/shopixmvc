@@ -22,7 +22,9 @@ class ProductController
         $productId = $_GET['id'] ?? '';
 
        $product = $this->productRepository->findByProductId($productId);
-        require __DIR__ . "/../View/Product.view.php";
+        $this->view->addTemplateParameter('productId', $productId);
+        $this->view->setTemplate('ProductView.tpl');
+        $this->view->display();
 
     }
 }
