@@ -26,4 +26,8 @@ class CategoriesController extends TestCase
         $this->view->setTemplate('HomeView.tpl');
         $this->view->display();
     }
+
+    public function testAdd(){
+        self::assertSame(25, $categories = $this->categoryRepository->findAll());
+    }
 }
