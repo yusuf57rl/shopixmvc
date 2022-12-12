@@ -2,12 +2,12 @@
 
 namespace App\Controller;
 
-
+use PHPUnit\Framework\TestCase;
 use App\Core\Container;
 use App\Core\View;
 use App\Model\Category\CategoryRepository;
 
-class CategoriesController
+class CategoriesController extends TestCase
 {
     private View $view;
     private CategoryRepository $categoryRepository;

@@ -22,7 +22,7 @@ class ProductController
         $productId = $_GET['id'] ?? '';
 
        $product = $this->productRepository->findByProductId($productId);
-        $this->view->addTemplateParameter('productId', $productId);
+        $this->view->addTemplateParameter('product', $product);
         $this->view->setTemplate('ProductView.tpl');
         $this->view->display();
 

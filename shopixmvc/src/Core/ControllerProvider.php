@@ -24,6 +24,8 @@ class ControllerProvider
 
             "home" => CategoriesController::class,
 
+            "" => CategoriesController::class,
+
         ];
     }
 

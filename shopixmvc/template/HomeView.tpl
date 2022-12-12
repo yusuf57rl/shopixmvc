@@ -16,7 +16,7 @@
 
 <section class="buttons">
     <br>
-    <h1>Shopix</h1>
+    <h1>&nbsp; Shopix</h1>
 
     <div class="space"></div>
     <div class="space"></div>
@@ -35,9 +35,6 @@
 
 </section>
 
-
-<p class="copyright"><strong>&nbsp; &copy; Y.Senel &nbsp; - &nbsp;</strong> <a href="#">Impressum &nbsp;</a> | <a
-            href="#">&nbsp; Datenschutzerklärung</a> | <a href="#">&nbsp; AGB</a></p>
 
 <div class="cursor"></div>
 <div class="cursor2"></div>

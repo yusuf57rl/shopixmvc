@@ -9,8 +9,8 @@
 }
 
 .buttons {
-    height: 100px;
-    width: auto;
+    height: 11.5%;
+    width: 8%;
     margin-top: -100px;
     margin-left: -150px;
     position: absolute;
@@ -67,7 +67,8 @@ a:hover {
 
 .copyright {
     color: #fcf6f6;
-    margin-block: auto;
+    width: 50%;
+    height: 5%;
 }
 
 /*.background {
@@ -84,7 +85,7 @@ a:hover {
 */
 
 .buttonzsm{
-    width: 95%;
+    width: 100%;
     margin: 0px auto
 }
 .button-3 {
@@ -153,7 +154,7 @@ a:hover {
 }
 
 .cursor2 {
-    width: 15px;
+    width: auto;
     height: 20px;
     border-radius: 100%;
     background-color: #25a43b;
@@ -170,7 +171,7 @@ a:hover {
 }
 
 .cursorinnerhover {
-    width: 50px;
+    width: auto;
     height: 50px;
     opacity: .5;
 }
