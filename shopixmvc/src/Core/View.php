@@ -24,7 +24,7 @@ class View
 
     public function getTemplateParameter(string $key): mixed
     {
-        return $this->params[$key];
+        return $this->params[$kphpey];
     }
 
     public function setTemplate(string $template): void

@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="vendor/autoload.php" colors="true">
-    <testsuite name="Calculator">
+<phpunit bootstrap="vendor/autoload.php"
+         colors="true"
+         executionOrder="random"
+         resolveDependencies="true"
+>
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+        <exclude>
+            <directory suffix=".php">src/Controller</directory>
+        </exclude>
+    </coverage>
+    <testsuite name="MVC">
         <directory>tests/</directory>
     </testsuite>
+
 </phpunit>
