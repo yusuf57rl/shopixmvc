@@ -29,10 +29,10 @@ $page = $_GET["page"] ?? "";
 $controller = new \App\Controller\CategoryController($container);
 
 foreach ($provider->getList() as $key => $controllerClass) {
-if ($key == $page ) {
-$controller = new $controllerClass($container);
-break;
-}
+    if ($key == $page ) {
+        $controller = new $controllerClass($container);
+    break;
+    }
 }
 
 
