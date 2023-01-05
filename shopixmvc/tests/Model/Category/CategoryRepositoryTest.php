@@ -9,7 +9,7 @@ class CategoryRepositoryTest extends TestCase
 {
     public function testFindAll(): void
     {
-        $categoryRepository = new CategoryRepository();$categoryList =
+        $categoryRepository = new CategoryRepository();
         $categoryList = $categoryRepository->findAll();
 
         self::assertCount(3, $categoryList);

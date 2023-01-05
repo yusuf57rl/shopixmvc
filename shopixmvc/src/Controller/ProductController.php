@@ -6,7 +6,7 @@ use App\Core\Container;
 use App\Core\View;
 use App\Model\Product\ProductRepository;
 
-class ProductController
+class ProductController  implements ControllerInterface
 {
     private View $view;
     private ProductRepository $productRepository;

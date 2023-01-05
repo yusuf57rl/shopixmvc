@@ -5,7 +5,7 @@ namespace App\Test\Model\Product;
 use App\Model\Product\ProductRepository;
 use PHPUnit\Framework\TestCase;
 
-class CategoryRepositoryTest extends TestCase
+class ProductRepositoryTest extends TestCase
 {
     public function testFindAll(): void
     {
@@ -18,7 +18,7 @@ class CategoryRepositoryTest extends TestCase
 
     public function testFindAllNegativ(): void
     {
-        $categoryRepository = new CategoryRepository(__DIR__ . '/productNegativ.json');
+        $categoryRepository = new ProductRepository(__DIR__ . '/productNegativ.json');
 
         $this->expectException(\JsonException::class);
 

@@ -7,7 +7,7 @@ use App\Core\View;
 use App\Model\Category\CategoryRepository;
 use App\Model\Product\ProductRepository;
 
-class CategoryController
+class CategoryController  implements ControllerInterface
 {
     private View $view;
     private ProductRepository $productRepository;

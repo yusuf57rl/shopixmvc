@@ -7,7 +7,7 @@ use App\Core\Container;
 use App\Core\View;
 use App\Model\Category\CategoryRepository;
 
-class CategoriesController implements ControllerInterface
+class ErrorController implements ControllerInterface
 {
     private View $view;
     private CategoryRepository $categoryRepository;
@@ -20,10 +20,7 @@ class CategoriesController implements ControllerInterface
 
     public function load(): void
     {
-        $categories = $this->categoryRepository->findAll();
-
-        $this->view->addTemplateParameter('categories', $categories);
-        $this->view->setTemplate('HomeView.tpl');
+        $this->view->setTemplate('Error.tpl');
         $this->view->display();
     }
 }

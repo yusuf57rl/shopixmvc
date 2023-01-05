@@ -7,12 +7,11 @@ class ProductRepository
     public function findAll(): array
     {
         $products = file_get_contents(__DIR__ . "/products.json");
-        $decodedText = html_entity_decode($products);
 
         try {
-            $productJs = json_decode($decodedText, true, 512, JSON_THROW_ON_ERROR);
+            $productJs = json_decode($products, true, 512, JSON_THROW_ON_ERROR);
         } catch (\JsonException $exception) {
-            var_dump($exception);
+            $productJs = [];
         }
 
         return $productJs;
@@ -33,6 +32,7 @@ class ProductRepository
         return $productsList;
 
     }
+
     public function findByProductId(string $id): array
     {
         $products = $this->findAll();

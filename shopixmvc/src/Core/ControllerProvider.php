@@ -7,11 +7,14 @@ namespace App\Core;
 use App\Controller\CategoriesController;
 use App\Controller\CategoryController;
 use App\Controller\ProductController;
+use App\Controller\ErrorController;
 
 class ControllerProvider
 {
 
-
+    /**
+     * @return string[]
+     */
     public function getList(): array
     {
 
@@ -24,7 +27,8 @@ class ControllerProvider
 
             "home" => CategoriesController::class,
 
-            "" => CategoriesController::class,
+            "" => ErrorController::class,
+
 
         ];
     }

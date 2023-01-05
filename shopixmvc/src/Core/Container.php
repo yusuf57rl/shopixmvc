@@ -12,7 +12,7 @@ class Container
         $this->object[$class] = $object;
     }
 
-    public function get(string $class)
+    public function get(string $class): object
     {
         return $this->object[$class];
     }

@@ -2,15 +2,15 @@
 
 namespace App\Test\Model\Core;
 
-use App\Core\View;
+use App\Model\Category\CategoryRepository;
 use PHPUnit\Framework\TestCase;
 
-class ViewTest extends TestCase
+class CoreTest extends TestCase
 {
-    public function testaddTemplateParameter(): void
+    public function testFindAll(): void
     {
-        $parameter = new View();
-    $parameter = $parameter->addTemplateParameter();
+        $categoryRepository = new CategoryRepository();$categoryList =
+    $categoryList = $categoryRepository->findAll();
 
         self::assertCount(3, $categoryList);
         self::assertSame('1', $categoryList[0]['id']);
