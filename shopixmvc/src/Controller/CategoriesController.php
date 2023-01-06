@@ -24,6 +24,5 @@ class CategoriesController implements ControllerInterface
 
         $this->view->addTemplateParameter('categories', $categories);
         $this->view->setTemplate('HomeView.tpl');
-        $this->view->display();
     }
 }

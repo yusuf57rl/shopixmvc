@@ -13,6 +13,10 @@ class CategoryRepositoryTest extends TestCase
         $categoryList = $categoryRepository->findAll();
 
         self::assertCount(3, $categoryList);
+
+        self::assertSame('T-Shirt', $categoryList[0]['name']);
+        self::assertSame('Qualitativ hochwertig', $categoryList[0]['designation']);
+
         self::assertSame('1', $categoryList[0]['id']);
     }
 

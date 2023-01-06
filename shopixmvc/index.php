@@ -20,6 +20,7 @@ foreach ($provider->getList() as $key => $controllerClass) {
         $controllerCheck = new $controllerClass($container);
         if($controllerCheck instanceof \App\Controller\ControllerInterface){
             $controller = $controllerCheck;
+            $this->view->display();
             break;
         }
     }

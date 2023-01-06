@@ -10,9 +10,15 @@ class ProductRepositoryTest extends TestCase
     public function testFindAll(): void
     {
         $productList = new ProductRepository();
-    $productList = $productList->findAll();
+        $productList = $productList->findAll();
 
-        self::assertCount(3, $productList);
+        self::assertCount(9, $productList);
+
+        //product 1
+        self::assertSame('Alpha T-Shirt', $productList[0]['name']);
+        self::assertSame('20.00', $productList[0]['price']);
+        self::assertSame("Alpha T-Shirt Qualität", $productList[0]['description']);
+
         self::assertSame('1', $productList[0]['id']);
     }
 

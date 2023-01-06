@@ -5,11 +5,11 @@ namespace App\Controller;
 
 use App\Core\Container;
 use App\Core\View;
+use App\Model\Category\CategoryRepository;
 
-class ErrorController implements ControllerInterface
+class HomeController implements ControllerInterface
 {
     private View $view;
-
 
     public function __construct(Container $container)
     {
@@ -18,6 +18,7 @@ class ErrorController implements ControllerInterface
 
     public function load(): void
     {
-        $this->view->setTemplate('Error.tpl');
+
+        $this->view->setTemplate('Home.tpl');
     }
 }

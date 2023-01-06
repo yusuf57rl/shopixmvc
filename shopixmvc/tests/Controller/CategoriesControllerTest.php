@@ -1,19 +1,21 @@
 <?php
 
-namespace App\Test\Model\Core;
+namespace App\Test\Controller;
 
+use App\Controller\CategoriesController;
 use App\Core\View;
 use PHPUnit\Framework\TestCase;
 
-class ViewTest extends TestCase
+class CategoriesControllerTest extends TestCase
 {
-    public function testaddTemplateParameter(): void
+    public function ():
     {
-        $parameter = new View();
-    $parameter = $parameter->addTemplateParameter();
+        $categories = new CategoriesController();
+        $categories = $categories->();
 
-        self::assertCount(3, $categoryList);
-        self::assertSame('1', $categoryList[0]['id']);
+
+        self::assertCount(3, $parameter);
+        self::assertSame('', );
     }
 
     public function testFindAllNegativ(): void

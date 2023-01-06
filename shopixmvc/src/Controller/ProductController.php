@@ -24,7 +24,6 @@ class ProductController  implements ControllerInterface
        $product = $this->productRepository->findByProductId($productId);
         $this->view->addTemplateParameter('product', $product);
         $this->view->setTemplate('ProductView.tpl');
-        $this->view->display();
 
     }
 }
