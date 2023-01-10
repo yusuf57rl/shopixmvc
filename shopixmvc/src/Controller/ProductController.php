@@ -6,7 +6,7 @@ use App\Core\Container;
 use App\Core\View;
 use App\Model\Product\ProductRepository;
 
-class ProductController  implements ControllerInterface
+class ProductController implements ControllerInterface
 {
     private View $view;
     private ProductRepository $productRepository;
@@ -21,7 +21,7 @@ class ProductController  implements ControllerInterface
     {
         $productId = $_GET['id'] ?? '';
 
-       $product = $this->productRepository->findByProductId($productId);
+        $product = $this->productRepository->findByProductId($productId);
         $this->view->addTemplateParameter('product', $product);
         $this->view->setTemplate('ProductView.tpl');
 

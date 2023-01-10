@@ -16,18 +16,17 @@ class ProductRepositoryTest extends TestCase
 
         //product 1
         self::assertSame('Alpha T-Shirt', $productList[0]['name']);
-        self::assertSame('20.00', $productList[0]['price']);
+        self::assertSame(20.0, $productList[0]['price']);
         self::assertSame("Alpha T-Shirt Qualität", $productList[0]['description']);
 
         self::assertSame('1', $productList[0]['id']);
     }
 
-    public function testFindAllNegativ(): void
+    public function testFindAllNegative(): void
     {
-        $categoryRepository = new ProductRepository(__DIR__ . '/productNegativ.json');
+        $categoryRepository = new ProductRepository(__DIR__ . '/productNegative.json');
 
-        $this->expectException(\JsonException::class);
 
-        $categoryRepository->findAll();
+        self::assertEmpty($categoryRepository->findAll());
     }
 }

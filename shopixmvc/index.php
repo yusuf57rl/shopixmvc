@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 require __DIR__ . "/vendor/autoload.php";
@@ -20,7 +19,6 @@ foreach ($provider->getList() as $key => $controllerClass) {
         $controllerCheck = new $controllerClass($container);
         if($controllerCheck instanceof \App\Controller\ControllerInterface){
             $controller = $controllerCheck;
-            $this->view->display();
             break;
         }
     }
@@ -28,3 +26,4 @@ foreach ($provider->getList() as $key => $controllerClass) {
 
 
 $controller->load();
+$this->view->display();

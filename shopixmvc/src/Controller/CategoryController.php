@@ -26,6 +26,5 @@ class CategoryController  implements ControllerInterface
 
         $this->view->addTemplateParameter('products', $products);
         $this->view->setTemplate('CategoryView.tpl');
-        $this->view->display();
     }
 }

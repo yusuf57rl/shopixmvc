@@ -6,8 +6,8 @@ namespace App\Core;
 
 use App\Controller\CategoriesController;
 use App\Controller\CategoryController;
+use App\Controller\HomeController;
 use App\Controller\ProductController;
-use App\Controller\ErrorController;
 
 class ControllerProvider
 {
@@ -27,7 +27,9 @@ class ControllerProvider
 
             "home" => CategoriesController::class,
 
-            "" => ErrorController::class,
+            "categories" => CategoriesController::class,
+
+            "" => CategoriesController::class,
 
 
         ];

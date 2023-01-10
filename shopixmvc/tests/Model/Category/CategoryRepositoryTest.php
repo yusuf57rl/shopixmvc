@@ -20,9 +20,9 @@ class CategoryRepositoryTest extends TestCase
         self::assertSame('1', $categoryList[0]['id']);
     }
 
-    public function testFindAllNegativ(): void
+    public function testFindAllNegative(): void
     {
-        $categoryRepository = new CategoryRepository(__DIR__ . '/categoryNegativ.json');
+        $categoryRepository = new CategoryRepository(__DIR__ . '/categoryNegative.json');
 
         $this->expectException(\JsonException::class);
 
