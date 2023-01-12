@@ -1,31 +1,32 @@
 <?php
 
-namespace App\Test\Model\Category;
+namespace App\Test\Model\Product;
 
-use App\Model\Category\CategoryRepository;
+use App\Model\Product\ProductRepository;
 use PHPUnit\Framework\TestCase;
 
-class CategoryRepositoryTest extends TestCase
+class ProductRepositoryTest extends TestCase
 {
     public function testFindAll(): void
     {
-        $categoryRepository = new CategoryRepository();
-        $categoryList = $categoryRepository->findAll();
+        $productList = new ProductRepository();
+        $productList = $productList->findAll();
 
-        self::assertCount(3, $categoryList);
+        self::assertCount(9, $productList);
 
-        self::assertSame('T-Shirt', $categoryList[0]['name']);
-        self::assertSame('Qualitativ hochwertig', $categoryList[0]['designation']);
+        //product 1
+        self::assertSame('Alpha T-Shirt', $productList[0]['name']);
+        self::assertSame(20.0, $productList[0]['price']);
+        self::assertSame("Alpha T-Shirt Qualität", $productList[0]['description']);
 
-        self::assertSame('1', $categoryList[0]['id']);
+        self::assertSame('1', $productList[0]['id']);
     }
 
     public function testFindAllNegative(): void
     {
-        $categoryRepository = new CategoryRepository(__DIR__ . '/categoryNegative.json');
+        $categoryRepository = new ProductRepository(__DIR__ . '/productNegative.json');
 
-        $this->expectException(\JsonException::class);
 
-        $categoryRepository->findAll();
+        self::assertEmpty($categoryRepository->findAll());
     }
 }
