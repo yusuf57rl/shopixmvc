@@ -32,4 +32,3 @@ foreach ($provider->getList() as $key => $controllerClass) {
 
 $controller->load();
 $container->get(View::class)->display();
-var_dump($container->get(View::class), new View(new Smarty()));
