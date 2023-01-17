@@ -41,6 +41,5 @@
 
 
 </body>
-<script src="/src/View/style/mouse.js"></script>
 
 </html>

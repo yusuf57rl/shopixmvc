@@ -13,8 +13,8 @@ class CategoryRepository
      */
     public function findAll(): array
     {
-        $categorie = file_get_contents($this->url);
-        $decodedText = html_entity_decode($categorie);
+        $category = file_get_contents($this->url);
+        $decodedText = html_entity_decode($category);
 
         return json_decode($decodedText, true, 512, JSON_THROW_ON_ERROR);
     }
