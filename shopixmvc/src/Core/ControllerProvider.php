@@ -6,7 +6,6 @@ namespace App\Core;
 
 use App\Controller\CategoriesController;
 use App\Controller\CategoryController;
-use App\Controller\HomeController;
 use App\Controller\ProductController;
 
 class ControllerProvider

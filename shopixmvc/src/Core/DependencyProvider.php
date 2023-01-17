@@ -16,9 +16,8 @@ class DependencyProvider
         $container->set(View::class, new View(new \Smarty()));
 
         //Repository's
-
-        $container->set(CategoryRepository::class, new CategoryRepository(new CategoryMapper()));
-        $container->set(ProductRepository::class, new ProductRepository(new ProductMapper()));
+        $container->set(CategoryRepository::class, new CategoryRepository(new CategoryMapper($categoryMapper)));
+        $container->set(ProductRepository::class, new ProductRepository(new ProductMapper($productMapper)));
 
     }
 }

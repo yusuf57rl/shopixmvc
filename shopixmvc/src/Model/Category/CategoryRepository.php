@@ -6,7 +6,7 @@ use App\Model\DTO\CategoryDTO;
 
 class CategoryRepository
 {
-    public function __construct(private $url = __DIR__ . '/category.json', private CategoryDTO $categoryDTO)
+    public function __construct(private $url = __DIR__ . '/category.json', private CategoryMapper $categorymapper)
     {
     }
 
