@@ -1,7 +1,6 @@
 <?php
 namespace App\Model\Product;
 
-use App\Model\Category\CategoryRepository;
 use App\Model\DTO\ProductDTO;
 use App\Model\Product\ProductRepository;
 

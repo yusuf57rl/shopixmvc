@@ -2,9 +2,11 @@
 
 namespace App\Model\Category;
 
+use App\Model\DTO\CategoryDTO;
+
 class CategoryRepository
 {
-    public function __construct(private $url = __DIR__ . '/category.json')
+    public function __construct(private $url = __DIR__ . '/category.json', private CategoryDTO $categoryDTO)
     {
     }
 
