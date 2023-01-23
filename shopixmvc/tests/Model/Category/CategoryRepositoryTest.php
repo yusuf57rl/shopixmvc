@@ -16,9 +16,9 @@ class CategoryRepositoryTest extends TestCase
 
         self::assertCount(3, $categoryList);
 
-        self::assertSame(1, $categoryList[0]->getId());
-        self::assertSame(2, $categoryList[1]->getId());
-        self::assertSame(3, $categoryList[2]->getId());
+        self::assertSame("1", $categoryList[0]->getId());
+        self::assertSame("2", $categoryList[1]->getId());
+        self::assertSame("3", $categoryList[2]->getId());
 
         self::assertSame('T-Shirt', $categoryList[0]->getName());
         self::assertSame('Jacken', $categoryList[1]->getName());
