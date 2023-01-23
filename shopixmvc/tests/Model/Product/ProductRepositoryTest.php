@@ -29,4 +29,10 @@ class ProductRepositoryTest extends TestCase
 
         self::assertEmpty($categoryRepository->findAll());
     }
-}
+
+    public function testFindbyProductIDNegative(): void
+    {
+        $categoryRepository = new ProductRepository(new ProductMapper(),__DIR__ . '/productNegative.json');
+
+        self::assertNull($categoryRepository->findByProductId("2"));
+    }}
