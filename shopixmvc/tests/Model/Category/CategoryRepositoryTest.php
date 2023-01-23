@@ -31,7 +31,7 @@ class CategoryRepositoryTest extends TestCase
 
     public function testFindAllNegative(): void
     {
-        $categoryRepository = new ProductRepository(new CategoryMapper(), __DIR__ . '/categoryNegative.json');
+        $categoryRepository = new CategoryRepository(new CategoryMapper(), __DIR__ . '/categoryNegative.json');
 
 
         self::assertEmpty($categoryRepository->findAll());
