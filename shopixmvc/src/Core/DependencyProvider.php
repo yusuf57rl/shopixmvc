@@ -2,7 +2,7 @@
 
 namespace App\Core;
 
-use App\Controller\ProductController;
+use    App\Controller\ProductController;
 use App\Model\Category\CategoryMapper;
 use App\Model\Category\CategoryRepository;
 use App\Model\DTO\CategoryDTO;

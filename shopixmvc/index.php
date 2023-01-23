@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 use App\Core\Container;
 use App\Core\View;
-
 require __DIR__ . "/vendor/autoload.php";
 
 $container = new Container();
-
 
 $dependencyprovider = new \App\Core\DependencyProvider();
 $dependencyprovider->provide($container);

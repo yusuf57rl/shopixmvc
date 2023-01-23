@@ -21,9 +21,10 @@
     <div class="space"></div>
     <div class="buttonzsm">
 
-{foreach $products as $category}
-    <a href="?page=product&id={$category['id']}"> <button class="button-3"><h2> {$category['name']} </h2></a></button> <div class="space"></div>
-{/foreach}
+        {foreach item=product from=$products}
+            <a href="?page=product&id={$product->getId()}"> <button class="button-3"><h2> {$product->getName()} </h2></a></button> <div class="space"></div>
+        {/foreach}
+
 
         <a href="index.php"><button class="button-3"><h2>Zurück</h2></button></a>
 

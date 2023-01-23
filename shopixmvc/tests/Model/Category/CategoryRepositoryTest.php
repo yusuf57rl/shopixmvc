@@ -1,30 +1,37 @@
 <?php
 
-namespace App\Test\Model\Product;
+namespace App\Test\Model\Category;
 
+use App\Model\Category\CategoryMapper;
+use App\Model\Category\CategoryRepository;
 use App\Model\Product\ProductRepository;
 use PHPUnit\Framework\TestCase;
 
-class ProductRepositoryTest extends TestCase
+class CategoryRepositoryTest extends TestCase
 {
     public function testFindAll(): void
     {
-        $productList = new ProductRepository();
-        $productList = $productList->findAll();
+        $categoryRepository = new CategoryRepository(new CategoryMapper());
+        $categoryList = $categoryRepository->findAll();
 
-        self::assertCount(9, $productList);
+        self::assertCount(3, $categoryList);
 
-        //product 1
-        self::assertSame('Alpha T-Shirt', $productList[0]['name']);
-        self::assertSame(20.0, $productList[0]['price']);
-        self::assertSame("Alpha T-Shirt Qualität", $productList[0]['description']);
+        self::assertSame(1, $categoryList[0]->getId());
+        self::assertSame(2, $categoryList[1]->getId());
+        self::assertSame(3, $categoryList[2]->getId());
 
-        self::assertSame('1', $productList[0]['id']);
+        self::assertSame('T-Shirt', $categoryList[0]->getName());
+        self::assertSame('Jacken', $categoryList[1]->getName());
+        self::assertSame("Hosen", $categoryList[2]->getName());
+
+        self::assertSame('Qualitativ hochwertig', $categoryList[0]->getDesignation());
+        self::assertSame('100% Baumwolle', $categoryList[1]->getDesignation());
+        self::assertSame("Elastisch", $categoryList[2]->getDesignation());
     }
 
     public function testFindAllNegative(): void
     {
-        $categoryRepository = new ProductRepository(__DIR__ . '/productNegative.json');
+        $categoryRepository = new ProductRepository(new CategoryMapper(), __DIR__ . '/categoryNegative.json');
 
 
         self::assertEmpty($categoryRepository->findAll());

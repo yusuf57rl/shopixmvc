@@ -9,14 +9,13 @@ class CategoryMapper
 
     public function map(array $category): CategoryDTO
     {
-
         $categoryDTO = new CategoryDTO();
 
-        $categoryDTO->setId($categoryDTO['id' ?? '']);
-        $categoryDTO->setName($categoryDTO['name' ?? '']);
-        $categoryDTO->setDesignation($categoryDTO['designation' ?? '']);
+        $categoryDTO->setId($category['id'] ?? '');
+        $categoryDTO->setName($category['name' ?? '']);
+        $categoryDTO->setDesignation($category['designation' ?? '']);
 
         return $categoryDTO;
 
     }
-    }
+}

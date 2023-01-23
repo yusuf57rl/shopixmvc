@@ -21,7 +21,7 @@
     <div class="space"></div>
     <div class="buttonzsm">
 
-    <h2>Name:<br>{$product['name']} </h2><br /><h2>Beschreibung:<br>{$product['description']}</h2> <br><h2>Preis: {$product['price']} <br></h2>";
+    <h2>Name:<br>{$product->getName()} </h2><br /><h2>Beschreibung:<br>{$product->getDescription()}</h2> <br><h2>Preis: {$product->getPrice()} <br></h2>";
 
         <div class="space"></div>
         <a href="index.php"><button class="button-3"><h2>Zurück</h2></button></a>

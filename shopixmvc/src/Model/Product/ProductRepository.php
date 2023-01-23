@@ -3,10 +3,11 @@
 namespace App\Model\Product;
 
 use App\Model\DTO\ProductDTO;
+use App\Model\Product\ProductMapper;
 
 class ProductRepository
 {
-    public function __construct(private $url = __DIR__ . '/products.json', private ProductMapper $productMapper)
+    public function __construct(private ProductMapper $productMapper, private $url = __DIR__ . '/products.json')
     {
     }
 

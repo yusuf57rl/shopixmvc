@@ -6,18 +6,29 @@ use App\Model\DTO\CategoryDTO;
 
 class CategoryRepository
 {
-    public function __construct(private $url = __DIR__ . '/category.json', private CategoryMapper $categorymapper)
+    public function __construct(private CategoryMapper $categorymapper, private $url = __DIR__ . '/category.json')
     {
     }
 
     /**
-     * @throws \JsonException
+     * @return CategoryDTO[]
      */
     public function findAll(): array
     {
         $category = file_get_contents($this->url);
-        $decodedText = html_entity_decode($category);
 
-        return json_decode($decodedText, true, 512, JSON_THROW_ON_ERROR);
+        try {
+            $categoriesJs = json_decode($category, true, 512, JSON_THROW_ON_ERROR);
+        } catch (\JsonException $exception) {
+            $categoriesJs = [];
+        }
+
+        $categoryDTOList = [];
+
+        foreach ($categoriesJs as $categoryJs) {
+            $categoryDTOList[] = $this->categorymapper->map($categoryJs);
+        }
+
+        return $categoryDTOList;
     }
 }
