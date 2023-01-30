@@ -35,4 +35,5 @@ class ProductRepositoryTest extends TestCase
         $categoryRepository = new ProductRepository(new ProductMapper(),__DIR__ . '/productNegative.json');
 
         self::assertNull($categoryRepository->findByProductId("2"));
-    }}
+    }
+}
