@@ -16,22 +16,13 @@ class ControllerProvider
      */
     public function getList(): array
     {
-
-
         return [
 
             "category" => CategoryController::class,
 
             "product" => ProductController::class,
 
-            "home" => CategoriesController::class,
-
             "categories" => CategoriesController::class,
-
-            "" => CategoriesController::class,
-
-
         ];
     }
-
 }

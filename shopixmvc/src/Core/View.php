@@ -36,6 +36,11 @@ class View
         $this->template = $template;
     }
 
+    /**
+     * @return void
+     * @throws \SmartyException
+     * @codeCoverageIgnore dont need to test
+     */
     public function display(): void
     {
         $this->smarty->assign($this->params);

@@ -16,7 +16,7 @@ $page = $_GET['page'] ?? '';
 
 $smarty = new Smarty();
 
-$controller = new \App\Controller\CategoryController($container);
+$controller = new \App\Controller\CategoriesController($container);
 foreach ($provider->getList() as $key => $controllerClass) {
     if ($key === $page) {
         $controllerCheck = new $controllerClass($container);
