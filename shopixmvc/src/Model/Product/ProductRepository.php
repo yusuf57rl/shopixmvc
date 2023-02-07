@@ -38,7 +38,6 @@ class ProductRepository
     {
         $statement = $this->PDO
             ->prepare('SELECT * FROM products');
-
         $statement->execute();
 
         $results = $statement

@@ -11,7 +11,8 @@
   },
   "require": {
     "php": "8.2.*",
-    "smarty/smarty": "^4.2"
+    "smarty/smarty": "^4.2",
+    "ext-pdo": "*"
   }
 ,
   "require-dev": {
