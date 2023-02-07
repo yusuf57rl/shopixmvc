@@ -2,6 +2,7 @@
 
 namespace App\Test\Model\Category;
 
+use App\Core\DatabaseConnection;
 use App\Model\Category\CategoryMapper;
 use App\Model\Category\CategoryRepository;
 use App\Model\Product\ProductRepository;
@@ -11,8 +12,10 @@ class CategoryRepositoryTest extends TestCase
 {
     public function testFindAll(): void
     {
-        $categoryRepository = new CategoryRepository(new CategoryMapper());
-        $categoryList = $categoryRepository->findAllFromJson();
+        $pdo = (new DatabaseConnection())->getConnection();
+
+        $categoryRepository = new CategoryRepository(new CategoryMapper(), $pdo);
+        $categoryList = $categoryRepository->findAll();
 
         self::assertCount(3, $categoryList);
 
@@ -29,11 +32,11 @@ class CategoryRepositoryTest extends TestCase
         self::assertSame("Elastisch", $categoryList[2]->getDesignation());
     }
 
-    public function testFindAllNegative(): void
-    {
-        $categoryRepository = new CategoryRepository(new CategoryMapper(), __DIR__ . '/categoryNegative.json');
-
-
-        self::assertEmpty($categoryRepository->findAllFromJson());
-    }
+   // public function testFindAllNegative(): void
+    //{
+    //    $categoryRepository = new CategoryRepository(new CategoryMapper(), __DIR__ . '/categoryNegative.json');
+//
+//
+    //      self::assertEmpty($categoryRepository->findAllFromJson());
+    // }
 }

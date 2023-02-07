@@ -14,11 +14,12 @@ class DatabaseConnection
     private string $password = "nexus123";
     private string $database = "shopixmvc";
 
-    public function getConnection(): false|PDO
+public function getConnection(): false|PDO
     {
 
         try {
-            $conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->database, $this->username, $this->password);
+            $dsn = "mysql:dbname={$this->database};host:{$this->host}";
+            $conn = new PDO($dsn, $this->username, $this->password);
             $conn->exec("set names utf8");
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $exception) {

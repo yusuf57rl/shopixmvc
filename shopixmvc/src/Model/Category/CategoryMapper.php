@@ -13,7 +13,7 @@ class CategoryMapper
 
         $categoryDTO->setId((string)$category['ID'] ?? '');
         $categoryDTO->setName($category['name'] ?? '');
-        $categoryDTO->setDesignation($category['designation'] ?? '');
+        $categoryDTO->setDesignation($category['desgination'] ?? '');
 
         return $categoryDTO;
     }

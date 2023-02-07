@@ -10,10 +10,10 @@ class ProductMapper
     {    
         $productDTO = new ProductDTO();
 
-        $productDTO->setId((string)$productList['id'] ?? '');
+        $productDTO->setId((int)$productList['ID'] ?? '');
         $productDTO->setName($productList['name']  ?? '');
         $productDTO->setDescription($productList['description'] ?? '');
-        $productDTO->setCategoryID($productList['categoryid']?? '');
+        $productDTO->setCategoryID((string)$productList['categoryId']?? '');
         $productDTO->setPrice((float)($productList["price"] ?? ""));
 
         return $productDTO;
