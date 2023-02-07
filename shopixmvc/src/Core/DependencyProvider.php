@@ -11,13 +11,13 @@ use App\Model\Product\ProductRepository;
 
 class DependencyProvider
 {
-    public function provide(Container $container): void
+    public function provide(Container $container, \PDO $PDO): void
     {
         $container->set(View::class, new View(new \Smarty()));
 
         //Repository's
-        $container->set(CategoryRepository::class, new CategoryRepository(new CategoryMapper()));
-        $container->set(ProductRepository::class, new ProductRepository(new ProductMapper()));
+        $container->set(CategoryRepository::class, new CategoryRepository(new CategoryMapper(), $PDO));
+        $container->set(ProductRepository::class, new ProductRepository(new ProductMapper(), $PDO));
 
     }
 }

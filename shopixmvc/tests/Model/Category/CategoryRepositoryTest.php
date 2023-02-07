@@ -12,7 +12,7 @@ class CategoryRepositoryTest extends TestCase
     public function testFindAll(): void
     {
         $categoryRepository = new CategoryRepository(new CategoryMapper());
-        $categoryList = $categoryRepository->findAll();
+        $categoryList = $categoryRepository->findAllFromJson();
 
         self::assertCount(3, $categoryList);
 
@@ -34,6 +34,6 @@ class CategoryRepositoryTest extends TestCase
         $categoryRepository = new CategoryRepository(new CategoryMapper(), __DIR__ . '/categoryNegative.json');
 
 
-        self::assertEmpty($categoryRepository->findAll());
+        self::assertEmpty($categoryRepository->findAllFromJson());
     }
 }

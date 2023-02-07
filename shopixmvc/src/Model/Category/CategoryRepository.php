@@ -6,14 +6,19 @@ use App\Model\DTO\CategoryDTO;
 
 class CategoryRepository
 {
-    public function __construct(private CategoryMapper $categorymapper, private $url = __DIR__ . '/category.json')
+    public function __construct(
+        private CategoryMapper $categorymapper,
+        private \PDO $PDO,
+        private $url = __DIR__ . '/category.json',
+    )
     {
     }
 
     /**
      * @return CategoryDTO[]
+     * @deprecated
      */
-    public function findAll(): array
+    public function findAllFromJson(): array
     {
         $category = file_get_contents($this->url);
 
@@ -30,5 +35,31 @@ class CategoryRepository
         }
 
         return $categoryDTOList;
+    }
+
+    /**
+     * @return CategoryDTO[]
+     */
+    public function findAll(): array
+    {
+        $statement = $this->PDO
+            ->prepare('SELECT * FROM categories');
+
+        $statement->execute();
+
+        $results = $statement
+            ->fetchAll(\PDO::FETCH_ASSOC);
+
+        if ($results === false) {
+            return [];
+        }
+
+        $categoryList = [];
+
+        foreach ($results as $result) {
+            $categoryList[] = $this->categorymapper->map($result);
+        }
+
+        return $categoryList;
     }
 }

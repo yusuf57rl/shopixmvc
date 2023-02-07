@@ -7,14 +7,15 @@ use App\Model\Product\ProductMapper;
 
 class ProductRepository
 {
-    public function __construct(private ProductMapper $productMapper, private $url = __DIR__ . '/products.json')
+    public function __construct(private ProductMapper $productMapper, private \PDO $PDO, private $url = __DIR__ . '/products.json')
     {
     }
 
     /**
      * @return ProductDTO[]
+     * @deprecated
      */
-    public function findAll(): array
+    public function findAllFromJson(): array
     {
         $products = file_get_contents($this->url);
 
@@ -33,6 +34,28 @@ class ProductRepository
         return $productDTOList;
     }
 
+    public function findAll(): array
+    {
+        $statement = $this->PDO
+            ->prepare('SELECT * FROM products');
+
+        $statement->execute();
+
+        $results = $statement
+            ->fetchAll(\PDO::FETCH_ASSOC);
+
+        if ($results === false) {
+            return [];
+        }
+
+        $productList = [];
+
+        foreach ($results as $result) {
+            $productList[] = $this->productMapper->map($result);
+        }
+
+        return $productList;
+    }
     /**
      * @param string $id
      * @return ProductDTO[]

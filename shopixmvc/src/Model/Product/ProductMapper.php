@@ -6,15 +6,15 @@ use App\Model\Product\ProductRepository;
 
 class ProductMapper
 {
-    public function map(array $productjs): ProductDTO
+    public function map(array $productList): ProductDTO
     {    
         $productDTO = new ProductDTO();
 
-        $productDTO->setId($productjs['id'] ?? '');
-        $productDTO->setName($productjs['name']  ?? '');
-        $productDTO->setDescription($productjs['description'] ?? '');
-        $productDTO->setCategoryID($productjs['categoryid']?? '');
-        $productDTO->setPrice((float)($productjs["price"] ?? ""));
+        $productDTO->setId((string)$productList['id'] ?? '');
+        $productDTO->setName($productList['name']  ?? '');
+        $productDTO->setDescription($productList['description'] ?? '');
+        $productDTO->setCategoryID($productList['categoryid']?? '');
+        $productDTO->setPrice((float)($productList["price"] ?? ""));
 
         return $productDTO;
     }

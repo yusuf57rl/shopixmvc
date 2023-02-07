@@ -6,10 +6,14 @@ use App\Core\Container;
 use App\Core\View;
 require __DIR__ . "/vendor/autoload.php";
 
+
+$dbConnection = new \App\Core\DatabaseConnection();
+$pdo = $dbConnection->getConnection();
+
 $container = new Container();
 
 $dependencyprovider = new \App\Core\DependencyProvider();
-$dependencyprovider->provide($container);
+$dependencyprovider->provide($container, $pdo);
 
 $provider = new \App\Core\ControllerProvider();
 $page = $_GET['page'] ?? '';
@@ -30,3 +34,5 @@ foreach ($provider->getList() as $key => $controllerClass) {
 
 $controller->load();
 $container->get(View::class)->display();
+
+unset($pdo);

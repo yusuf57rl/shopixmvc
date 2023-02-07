@@ -11,11 +11,10 @@ class CategoryMapper
     {
         $categoryDTO = new CategoryDTO();
 
-        $categoryDTO->setId($category['id'] ?? '');
-        $categoryDTO->setName($category['name' ?? '']);
-        $categoryDTO->setDesignation($category['designation' ?? '']);
+        $categoryDTO->setId((string)$category['ID'] ?? '');
+        $categoryDTO->setName($category['name'] ?? '');
+        $categoryDTO->setDesignation($category['designation'] ?? '');
 
         return $categoryDTO;
-
     }
 }
