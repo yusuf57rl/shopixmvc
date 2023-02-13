@@ -9,23 +9,25 @@ use PDOException;
 
 class DatabaseConnection
 {
+
     private string $host = "localhost:3336";
     private string $username = "root";
     private string $password = "nexus123";
     private string $database = "shopixmvc";
 
-public function getConnection(): false|PDO
-    {
+
+    public function getConnection() {
+
+        $this->conn = null;
 
         try {
-            $dsn = "mysql:dbname={$this->database};host:{$this->host}";
-            $conn = new PDO($dsn, $this->username, $this->password);
-            $conn->exec("set names utf8");
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $exception) {
-            return false;
+            $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->database, $this->username, $this->password);
+            $this->conn->exec("set names utf8");
+        } catch(PDOException $exception) {
+            echo "Connection error: " . $exception->getMessage();
         }
 
-        return $conn;
+        return $this->conn;
     }
+
 }
