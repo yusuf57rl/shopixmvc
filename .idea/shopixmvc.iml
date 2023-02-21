@@ -36,6 +36,31 @@
       <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/phar-io/manifest" />
       <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/phar-io/version" />
       <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/doctrine/instantiator" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/infection/include-interceptor" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/infection/abstract-testframework-adapter" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/infection/infection" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/infection/extension-installer" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/fidry/cpu-core-counter" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/justinrainbow/json-schema" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/colinodell/json5" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/symfony/filesystem" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/symfony/console" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/symfony/service-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/symfony/string" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/symfony/process" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/symfony/polyfill-intl-normalizer" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/symfony/polyfill-intl-grapheme" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/symfony/finder" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/psr/container" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/psr/log" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/sanmai/later" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/sanmai/pipeline" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/thecodingmachine/safe" />
+      <excludeFolder url="file://$MODULE_DIR$/shopixmvc/vendor/ondram/ci-detector" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

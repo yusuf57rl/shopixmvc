@@ -12,13 +12,19 @@ $pdo = $dbConnection->getConnection();
 
 $container = new Container();
 
+$smarty = new Smarty();
+$smarty->setTemplateDir(__DIR__ . '/template');
+$smarty->setCompileDir(__DIR__ . '/smarty/template_c');
+$smarty->setCacheDir(__DIR__ . '/smarty/cache');
+$smarty->setConfigDir(__DIR__ . '/smarty/config');
+
 $dependencyprovider = new \App\Core\DependencyProvider();
-$dependencyprovider->provide($container, $pdo);
+$dependencyprovider->provide($container, $pdo, $smarty);
 
 $provider = new \App\Core\ControllerProvider();
 $page = $_GET['page'] ?? '';
 
-$smarty = new Smarty();
+
 
 $controller = new \App\Controller\CategoriesController($container);
 foreach ($provider->getList() as $key => $controllerClass) {
@@ -35,4 +41,4 @@ foreach ($provider->getList() as $key => $controllerClass) {
 $controller->load();
 $container->get(View::class)->display();
 
-unset($pdo);
+$dbConnection->closeConnection($pdo);

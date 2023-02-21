@@ -1,23 +1,25 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Model\DTO;
 
 class CategoryDTO
 {
-    private string $id;
+    private int $id;
 
     /**
-     * @return string
+     * @return int
      */
-    public function getId(): string
+    public function getId(): int
     {
         return $this->id;
     }
 
+
     /**
-     * @param string $id
+     * @param int $id
      */
-    public function setId(string $id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }

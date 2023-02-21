@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Model\Product;
 
@@ -23,10 +24,6 @@ class ProductRepository
         $results = $statement
             ->fetchAll(\PDO::FETCH_ASSOC);
 
-        if ($results === false) {
-            return [];
-        }
-
         $productList = [];
 
         foreach ($results as $result) {
@@ -37,36 +34,39 @@ class ProductRepository
     }
 
     /**
-     * @param string $id
+     * @param int $id
      * @return ProductDTO[]
      */
-    public function findByCategoryId(string $id): array
+    public function findByCategoryId(int $id): array
     {
-        $products = $this->findAll();
+        $statement = $this->PDO
+            ->prepare('SELECT * FROM products WHERE categoryId = ' . $id);
+
+        $statement->execute();
+        $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
 
         $productsList = [];
 
-        foreach ($products as $product) {
-            if ($id === $product->getCategoryId()) {
-                $productsList[] = $product;
-            }
+        foreach ($results as $product) {
+            $productsList[] = $this->productMapper->map($product);
         }
 
         return $productsList;
-
     }
 
-    public function findByProductId(string $id)
+    public function findByProductId(int $id): ?ProductDTO
     {
-        $products = $this->findAll();
+        $statement = $this->PDO
+            ->prepare('SELECT * FROM products WHERE ID = ' . $id);
 
-        foreach ($products as $product) {
-            if ($id === $product->getId()) {
-                return $product;
-            }
+        $statement->execute();
+        $results = $statement->fetch(\PDO::FETCH_ASSOC);
+
+        if ($results === false) {
+            return null;
         }
 
-        return null;
-
+        return $this->productMapper->map($results);
     }
 }

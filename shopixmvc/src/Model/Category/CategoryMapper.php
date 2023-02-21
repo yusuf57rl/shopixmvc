@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Model\Category;
 
@@ -11,9 +12,9 @@ class CategoryMapper
     {
         $categoryDTO = new CategoryDTO();
 
-        $categoryDTO->setId((string)$category['ID'] ?? '');
-        $categoryDTO->setName($category['name'] ?? '');
-        $categoryDTO->setDesignation($category['desgination'] ?? '');
+        $categoryDTO->setId($category['ID']);
+        $categoryDTO->setName($category['name']);
+        $categoryDTO->setDesignation($category['desgination']);
 
         return $categoryDTO;
     }

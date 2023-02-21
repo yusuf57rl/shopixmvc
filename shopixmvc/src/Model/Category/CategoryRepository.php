@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Model\Category;
 
@@ -26,10 +27,6 @@ class CategoryRepository
 
         $results = $statement
             ->fetchAll(\PDO::FETCH_ASSOC);
-
-        if ($results === false) {
-            return [];
-        }
 
         $categoryList = [];
 

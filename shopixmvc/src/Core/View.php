@@ -11,10 +11,6 @@ class View
         private readonly \Smarty $smarty,
     )
     {
-        $this->smarty->setTemplateDir(__DIR__ . '/../../template');
-        $this->smarty->setCompileDir(__DIR__ . '/../../smarty/template_c');
-        $this->smarty->setCacheDir(__DIR__ . '/../../smarty/cache');
-        $this->smarty->setConfigDir(__DIR__ . '/../../smarty/config');
     }
 
     public function addTemplateParameter(string $key, mixed $value): void

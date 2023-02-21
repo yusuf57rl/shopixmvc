@@ -1,8 +1,11 @@
 <?php
+declare(strict_types=1);
+
+
 namespace App\Model\Product;
 
+
 use App\Model\DTO\ProductDTO;
-use App\Model\Product\ProductRepository;
 
 class ProductMapper
 {
@@ -10,11 +13,11 @@ class ProductMapper
     {    
         $productDTO = new ProductDTO();
 
-        $productDTO->setId((int)$productList['ID'] ?? '');
-        $productDTO->setName($productList['name']  ?? '');
-        $productDTO->setDescription($productList['description'] ?? '');
-        $productDTO->setCategoryID((string)$productList['categoryId']?? '');
-        $productDTO->setPrice((float)($productList["price"] ?? ""));
+        $productDTO->setId($productList['ID']);
+        $productDTO->setName($productList['name']);
+        $productDTO->setDescription($productList['description']);
+        $productDTO->setCategoryID($productList['categoryId']);
+        $productDTO->setPrice($productList["price"]);
 
         return $productDTO;
     }

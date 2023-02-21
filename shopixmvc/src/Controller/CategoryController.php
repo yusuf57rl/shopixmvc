@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Controller;
 
@@ -20,7 +21,7 @@ class CategoryController  implements ControllerInterface
 
     public function load(): void
     {
-        $categoryId = $_GET['id'] ?? '';
+        $categoryId = (int)($_GET['id'] ?? '');
 
         $products = $this->productRepository->findByCategoryId($categoryId);
 

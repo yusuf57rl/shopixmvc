@@ -41,6 +41,31 @@
       <path value="$PROJECT_DIR$/shopixmvc/vendor/phar-io/manifest" />
       <path value="$PROJECT_DIR$/shopixmvc/vendor/phar-io/version" />
       <path value="$PROJECT_DIR$/shopixmvc/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/infection/include-interceptor" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/infection/abstract-testframework-adapter" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/infection/infection" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/infection/extension-installer" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/fidry/cpu-core-counter" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/justinrainbow/json-schema" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/colinodell/json5" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/sanmai/later" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/sanmai/pipeline" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/thecodingmachine/safe" />
+      <path value="$PROJECT_DIR$/shopixmvc/vendor/ondram/ci-detector" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1">

@@ -1,27 +1,28 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Model\DTO;
 
 class ProductDTO
 {
-    private string $id;
+    private int $id;
     private string $name;
     private string $description;
-    private string $categoryId;
+    private int $categoryId;
     private float $price;
 
     /**
-     * @return string
+     * @return int
      */
-    public function getId(): string
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * @param string $id
+     * @param int $id
      */
-    public function setId(string $id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
@@ -59,17 +60,17 @@ class ProductDTO
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getCategoryId(): string
+    public function getCategoryId(): int
     {
         return $this->categoryId;
     }
 
     /**
-     * @param string $categoryId
+     * @param int $categoryId
      */
-    public function setCategoryId(string $categoryId): void
+    public function setCategoryId(int $categoryId): void
     {
         $this->categoryId = $categoryId;
     }

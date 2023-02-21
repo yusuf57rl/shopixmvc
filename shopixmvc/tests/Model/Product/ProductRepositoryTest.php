@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Test\Model\Product;
 
@@ -23,7 +24,7 @@ class ProductRepositoryTest extends TestCase
         self::assertSame('Alpha T-Shirt', $productList[0]->getName());
         self::assertSame(20.0, $productList[0]->getPrice());
         self::assertSame("Alpha T-Shirt Qualität", $productList[0]->getDescription());
-        self::assertSame('1', $productList[0]->getID());
+        self::assertSame(1, $productList[0]->getID());
     }
 
     public function testFindByCategoryID(): void
@@ -39,9 +40,9 @@ class ProductRepositoryTest extends TestCase
         //product 1
         self::assertSame('Alpha T-Shirt', $productList[0]->getName());
         self::assertSame(20.0, $productList[0]->getPrice());
-        self::assertSame("1", $productList[0]->getCategoryId());
+        self::assertSame(1, $productList[0]->getCategoryId());
         self::assertSame("Alpha T-Shirt Qualität", $productList[0]->getDescription());
-        self::assertSame('1', $productList[0]->getID());
+        self::assertSame(1, $productList[0]->getID());
     }
 
     public function testFindByProductID(): void
@@ -50,21 +51,24 @@ class ProductRepositoryTest extends TestCase
         $pdo = (new DatabaseConnection())->getConnection();
         $id = 1;
 
-        $productsByProductID = new ProductRepository(new ProductMapper(), $pdo);
-        $productList = $productsByProductID->findByProductId($id);
+        $productRepository = new ProductRepository(new ProductMapper(), $pdo);
+        $productDTO = $productRepository->findByProductId($id);
 
-        self::assertCount(1, $productList);
-        //product 1
-        self::assertSame('Alpha T-Shirt', $productList[0]->getName());
-        self::assertSame(20.0, $productList[0]->getPrice());
-        self::assertSame("Alpha T-Shirt Qualität", $productList[0]->getDescription());
-        self::assertSame('1', $productList[0]->getID());
+        self::assertSame('Alpha T-Shirt', $productDTO->getName());
+        self::assertSame(20.0, $productDTO->getPrice());
+        self::assertSame("Alpha T-Shirt Qualität", $productDTO->getDescription());
+        self::assertSame($id, $productDTO->getID());
     }
 
-    //public function testFindAllNegative(): void
-    //{
-    //  $categoryRepository = new ProductRepository(new ProductMapper(),__DIR__ . '/productNegative.json');
+    public function testFindByProductIDNegativ(): void
+    {
 
-    //    self::assertEmpty($categoryRepository->findAll());
-    //  }
+        $pdo = (new DatabaseConnection())->getConnection();
+
+        $productRepository = new ProductRepository(new ProductMapper(), $pdo);
+        $productDTO = $productRepository->findByProductId(666);
+
+        self::assertNull($productDTO);
+    }
+
 }

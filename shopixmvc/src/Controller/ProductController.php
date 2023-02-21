@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Controller;
 
@@ -19,7 +20,7 @@ class ProductController implements ControllerInterface
 
     public function load(): void
     {
-        $productId = $_GET['id'] ?? '';
+        $productId = (int)($_GET['id'] ?? '');
 
         $product = $this->productRepository->findByProductId($productId);
         $this->view->addTemplateParameter('product', $product);
