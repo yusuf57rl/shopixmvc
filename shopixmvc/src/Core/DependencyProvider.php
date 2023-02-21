@@ -7,6 +7,7 @@ use App\Model\Category\CategoryRepository;
 use App\Model\Product\ProductMapper;
 use App\Model\Product\ProductRepository;
 use App\Model\User\UserEntityManager;
+use App\Model\User\UserRepository;
 
 class DependencyProvider
 {
@@ -17,6 +18,7 @@ class DependencyProvider
         //Repository's
         $container->set(CategoryRepository::class, new CategoryRepository(new CategoryMapper(), $PDO));
         $container->set(ProductRepository::class, new ProductRepository(new ProductMapper(), $PDO));
+        $container->set(UserRepository::class, new UserRepository($PDO));
 
         //EntityManagers
         $container->set(UserEntityManager::class, new UserEntityManager($PDO));
