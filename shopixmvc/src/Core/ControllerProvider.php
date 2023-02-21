@@ -8,6 +8,7 @@ use App\Controller\CategoriesController;
 use App\Controller\CategoryController;
 use App\Controller\LoginController;
 use App\Controller\ProductController;
+use App\Controller\RegisterController;
 
 class ControllerProvider
 {
@@ -27,6 +28,7 @@ class ControllerProvider
 
             "login" => LoginController::class,
 
+            "register" => RegisterController::class,
         ];
     }
 }

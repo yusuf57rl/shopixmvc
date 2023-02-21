@@ -6,7 +6,7 @@ namespace App\Controller;
 
 use App\Core\Container;
 use App\Core\View;
-use smarty;
+use App\Model\UserModel;
 
 class LoginController {
     private $smarty;
@@ -20,7 +20,6 @@ class LoginController {
     }
 
     public function load(): void {
-
         $this->view->setTemplate('Login.tpl');
     }
 
