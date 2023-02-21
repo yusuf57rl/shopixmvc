@@ -14,26 +14,25 @@ class RegisterController implements ControllerInterface
 {
     private UserEntityManager $userEntityManager;
     private View $view;
+    private object $UserRepository;
 
     public function __construct(Container $container)
     {
         $this->view = $container->get(View::class);
         $this->userEntityManager = $container->get(UserEntityManager::class);
+        $this->UserRepository = $container->get(UserRepository::class);
     }
 
     public function load(): void
     {
         $errors = [];
 
-        $userRepository = new UserRepository;
-        $userRepository->checkUsername();
-
         if (isset($_POST['register'])) {
             $username = $_POST['username'] ?? '';
             $password = $_POST['password'] ?? '';
             $verPassword = $_POST['verPassword'] ?? '';
 
-            if ($userRepository->findByUsername($username) instanceof UserDTO) {
+            if ($this->UserRepository->checkUsername($username) instanceof UserDTO) {
                 $errors[] = 'User with this username already exists';
             }
 
