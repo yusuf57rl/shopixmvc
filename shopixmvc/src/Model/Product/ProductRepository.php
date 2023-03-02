@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Product;
@@ -45,7 +46,6 @@ class ProductRepository
         $statement->execute();
         $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
-
         $productsList = [];
 
         foreach ($results as $product) {
@@ -58,15 +58,37 @@ class ProductRepository
     public function findByProductId(int $id): ?ProductDTO
     {
         $statement = $this->PDO
-            ->prepare('SELECT * FROM products WHERE ID = ' . $id);
+            ->prepare('SELECT * FROM products WHERE id = :id');
+        $statement->execute(['id' => $id]);
 
-        $statement->execute();
-        $results = $statement->fetch(\PDO::FETCH_ASSOC);
+        $result = $statement->fetch(\PDO::FETCH_ASSOC);
 
-        if ($results === false) {
+        if (!$result) {
             return null;
         }
 
-        return $this->productMapper->map($results);
+        return $this->productMapper->map($result);
+    }
+
+    public function updateProduct(ProductDTO $productDTO): void
+    {
+        $statement = $this->PDO->prepare('UPDATE products SET name = :name, description = :description, categoryId = :categoryId, price = :price WHERE id = :id');
+
+        $statement->bindValue(':id', $productDTO->getId(), \PDO::PARAM_INT);
+        $statement->bindValue(':name', $productDTO->getName(), \PDO::PARAM_STR);
+        $statement->bindValue(':description', $productDTO->getDescription(), \PDO::PARAM_STR);
+        $statement->bindValue(':categoryId', $productDTO->getCategoryId(), \PDO::PARAM_INT);
+        $statement->bindValue(':price', $productDTO->getPrice(), \PDO::PARAM_STR);
+
+        $statement->execute();
+    }
+
+    public function deleteProduct(int $id): void
+    {
+        $statement = $this->PDO->prepare('DELETE FROM products WHERE id = :id');
+
+        $statement->execute([
+            'id' => $id
+        ]);
     }
 }

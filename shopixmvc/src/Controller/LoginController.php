@@ -1,30 +1,31 @@
 <?php
 declare(strict_types=1);
 
-
 namespace App\Controller;
 
 use App\Core\Container;
 use App\Core\View;
-use App\Model\UserModel;
+use App\Model\User\UserRepository;
 
-class LoginController {
-    private $smarty;
-    private $userModel;
+class LoginController
+{
     private View $view;
+    private UserRepository $userRepository;
 
-
-    function __construct(Container $container) {
+    public function __construct(Container $container)
+    {
         $this->view = $container->get(View::class);
-        $this->userModel = new UserModel();
+        $this->userRepository = $container->get(UserRepository::class);
     }
 
-    public function load(): void {
+    public function load(): void
+    {
         $this->view->setTemplate('Login.tpl');
     }
 
-    public function validateUserCredentials($username, $password) {
-        $user = $this->userModel->getUserByUsername($username);
+    public function validateUserCredentials(string $username, string $password): bool
+    {
+        $user = $this->userRepository->getUserByUsername($username);
 
         if (!$user) {
             // Benutzername existiert nicht in der Datenbank
@@ -32,12 +33,11 @@ class LoginController {
         }
 
         // Überprüfen, ob das eingegebene Passwort mit dem in der Datenbank gespeicherten übereinstimmt
-        if (password_verify($password, $user['password'])) {
+        if (password_verify($password, $user->getPassword())) {
             return true;
         } else {
             // Falsches Passwort
             return false;
         }
     }
-
 }

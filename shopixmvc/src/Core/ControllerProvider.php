@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core;
 
+use App\Controller\AdminController;
 use App\Controller\CategoriesController;
 use App\Controller\CategoryController;
 use App\Controller\LoginController;
@@ -29,6 +30,9 @@ class ControllerProvider
             "login" => LoginController::class,
 
             "register" => RegisterController::class,
+
+            "admin" => AdminController::class,
+
         ];
     }
 }
