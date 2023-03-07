@@ -14,7 +14,7 @@ class RegisterController implements ControllerInterface
 {
     private UserEntityManager $userEntityManager;
     private View $view;
-    private object $UserRepository;
+    private UserRepository $UserRepository;
 
     public function __construct(Container $container)
     {
@@ -26,13 +26,15 @@ class RegisterController implements ControllerInterface
     public function load(): void
     {
         $errors = [];
+        $postSend = false;
 
         if (isset($_POST['register'])) {
+            $postSend = true;
             $username = $_POST['username'] ?? '';
             $password = $_POST['password'] ?? '';
             $verPassword = $_POST['verPassword'] ?? '';
 
-            if ($this->UserRepository->checkUsername($username) instanceof UserDTO) {
+            if ($this->UserRepository->checkUsername($username) === true) {
                 $errors[] = 'User with this username already exists';
             }
 
@@ -52,6 +54,7 @@ class RegisterController implements ControllerInterface
             }
         }
 
+        $this->view->addTemplateParameter('postSend', $postSend);
         $this->view->addTemplateParameter('errors', $errors);
         $this->view->setTemplate('Register.tpl');
     }

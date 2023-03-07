@@ -6,6 +6,7 @@ use App\Core\Container;
 use App\Core\View;
 require __DIR__ . "/vendor/autoload.php";
 
+session_start();
 
 $dbConnection = new \App\Core\DatabaseConnection();
 $pdo = $dbConnection->getConnection();
@@ -42,3 +43,5 @@ $controller->load();
 $container->get(View::class)->display();
 
 $dbConnection->closeConnection($pdo);
+
+//session_destroy(); TODO in logout controller

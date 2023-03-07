@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.0, created on 2023-02-21 11:02:56
+/* Smarty version 4.3.0, created on 2023-02-21 15:15:29
   from '/home/yusuf/PhpstormProjects/shopixmvc/shopixmvc/template/Register.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.0',
-  'unifunc' => 'content_63f496d054d729_98410816',
+  'unifunc' => 'content_63f4d201b5c637_27098177',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '332a777f4a0292073d83fb0726965674001e7575' => 
     array (
       0 => '/home/yusuf/PhpstormProjects/shopixmvc/shopixmvc/template/Register.tpl',
-      1 => 1676973128,
+      1 => 1676988924,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_63f496d054d729_98410816 (Smarty_Internal_Template $_smarty_tpl) {
+function content_63f4d201b5c637_27098177 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -73,6 +73,21 @@ function content_63f496d054d729_98410816 (Smarty_Internal_Template $_smarty_tpl)
                 <div class="card-body p-md-5">
                     <div class="row justify-content-center">
                         <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                            <?php if (empty($_smarty_tpl->tpl_vars['errors']->value) && $_smarty_tpl->tpl_vars['postSend']->value === true) {?>
+                                User wurde erstellt
+                            <?php } else { ?>
+                                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['errors']->value, 'error');
+$_smarty_tpl->tpl_vars['error']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['error']->value) {
+$_smarty_tpl->tpl_vars['error']->do_else = false;
+?>
+                                    <?php echo $_smarty_tpl->tpl_vars['error']->value;?>
+
+                                <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+                            <?php }?>
 
                             <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
