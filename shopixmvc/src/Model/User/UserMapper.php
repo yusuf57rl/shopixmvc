@@ -14,8 +14,6 @@ class UserMapper
         $userDTO->setId($userList['id']);
         $userDTO->setUsername($userList['username']);
         $userDTO->setPassword($userList['password']);
-        $userDTO->setVerification($userList['verification']);
-        $userDTO->setRank($userList['rank']);
 
         return $userDTO;
     }

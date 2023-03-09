@@ -83,6 +83,19 @@ class ProductRepository
         $statement->execute();
     }
 
+    public function createProduct(ProductDTO $productDTO): void
+    {
+        $statement = $this->PDO->prepare('INSERT into products SET name = :name, description = :description, categoryId = :categoryId, price = :price');
+
+        $statement->bindValue(':name', $productDTO->getName(), \PDO::PARAM_STR);
+        $statement->bindValue(':description', $productDTO->getDescription(), \PDO::PARAM_STR);
+        $statement->bindValue(':categoryId', $productDTO->getCategoryId(), \PDO::PARAM_INT);
+        $statement->bindValue(':price', $productDTO->getPrice(), \PDO::PARAM_STR);
+
+        $statement->execute();
+    }
+
+
     public function deleteProduct(int $id): void
     {
         $statement = $this->PDO->prepare('DELETE FROM products WHERE id = :id');

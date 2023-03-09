@@ -70,15 +70,15 @@
                 <td>{$product->getDescription()}</td>
                 <td>{$product->getPrice()}</td>
                 <td>
-                    <a href="?page=admin&action=edit_product&id={$product->getId()}" class="btn btn-primary">Bearbeiten</a>
-                    <a href="?page=admin&action=delete_product&id={$product->getId()}" class="btn btn-danger">Löschen</a>
+                    <a href="?page=edit&id={$product->getId()}" class="btn btn-primary">Bearbeiten</a>
+                    <a href="?page=admin&action=delete&id={$product->getId()}" class="btn btn-danger">Löschen</a>
                 </td>
             </tr>
         {/foreach}
         </tbody>
     </table>
     <div class="text-right">
-        <a href="?page=admin&action=add_product" class="btn btn-primary">Produkt hinzufügen</a>
+        <a href="?page=add" class="btn btn-primary">Produkt hinzufügen</a>
         <a href="?page=admin" class="btn btn-secondary">Zurück zur Übersicht</a>
     </div>
 </main>

@@ -75,11 +75,7 @@
             {/foreach}
         </select>
     </div>
-    <div class="form-group">
-        <label for="image">Bild:</label>
-        <input type="file" class="form-control-file" id="image" name="image">
-    </div>
-    <button type="submit" class="btn btn-primary">Speichern</button>
+                <input type="submit" name="update" value="Speichern">
     </form>
     </div>
     </div>

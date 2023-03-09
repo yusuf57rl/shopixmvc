@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core;
 
+use App\Controller\AddController;
 use App\Controller\AdminController;
 use App\Controller\CategoriesController;
 use App\Controller\CategoryController;
