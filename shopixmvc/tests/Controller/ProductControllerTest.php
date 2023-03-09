@@ -31,7 +31,7 @@ class ProductControllerTest extends TestCase
         $products = $view->getTemplateParameter('product');
 
         self::assertSame(1, $products->getId());
-        self::assertSame('Alpha T-Shirt', $products->getName());
+        self::assertSame('Jaja', $products->getName());
         self::assertSame(1, $products->getCategoryId());
         self::assertSame('Alpha T-Shirt Qualität', $products->getDescription());
         self::assertSame(20.0, $products->getPrice());

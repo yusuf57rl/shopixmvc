@@ -39,8 +39,6 @@ class AddController implements ControllerInterface
         $product->setCategoryid(($_POST['categoryid'] ?? 0));
 
         if (isset($_POST['add'])) {
-
-
             $this->productRepository->createProduct($product);
             header('Location: /?page=admin');
         }

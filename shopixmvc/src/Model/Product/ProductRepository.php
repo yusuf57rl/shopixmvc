@@ -16,6 +16,9 @@ class ProductRepository
     {
     }
 
+    /**
+     * @return ProductDTO[]
+     */
     public function findAll(): array
     {
         $statement = $this->PDO
