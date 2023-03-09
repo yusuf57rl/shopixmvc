@@ -54,7 +54,7 @@
     </section>
     <div class="album py-5 bg-light">
         <div class="container">
-            <form method="post" action="?page=admin&action=editproduct&id={$product->getId()}">
+            <form method="post" action="?page=edit&id={$product->getId()}">
                 <div class="form-group">
                     <label for="name">Name:</label>
                     <input type="text" class="form-control" id="name" name="name" value="{$product->getName()}">

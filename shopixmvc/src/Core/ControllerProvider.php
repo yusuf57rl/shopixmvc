@@ -8,6 +8,7 @@ use App\Controller\AddController;
 use App\Controller\AdminController;
 use App\Controller\CategoriesController;
 use App\Controller\CategoryController;
+use App\Controller\EditController;
 use App\Controller\LoginController;
 use App\Controller\ProductController;
 use App\Controller\RegisterController;
@@ -33,6 +34,10 @@ class ControllerProvider
             "register" => RegisterController::class,
 
             "admin" => AdminController::class,
+
+            "edit" => EditController::class,
+
+            "add" => AddController::class,
 
         ];
     }

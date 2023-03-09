@@ -34,7 +34,7 @@ class RegisterController implements ControllerInterface
             $password = $_POST['password'] ?? '';
             $verPassword = $_POST['verPassword'] ?? '';
 
-            if ($this->UserRepository->checkUsername($username) === true) {
+            if ($this->UserRepository->getUserByUsername($username) instanceof UserDTO) {
                 $errors[] = 'User with this username already exists';
             }
 
