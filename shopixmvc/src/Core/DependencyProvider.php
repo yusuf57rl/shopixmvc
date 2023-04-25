@@ -11,12 +11,14 @@ use App\Model\User\UserEntityManager;
 use App\Model\User\UserMapper;
 use App\Model\DTO\UserDTO;
 use App\Model\User\UserRepository;
+use App\Core\Redirector;
 
 class DependencyProvider
 {
     public function provide(Container $container, \PDO $PDO, \Smarty $smarty): void
     {
         $container->set(View::class, new View($smarty));
+        $container->set(Redirector::class, new Redirector());
 
         // Repositories
         $container->set(CategoryRepository::class, new CategoryRepository(new CategoryMapper(), $PDO));

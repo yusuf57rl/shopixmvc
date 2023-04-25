@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Core\Container;
+use App\Core\Redirector;
 use App\Core\View;
 use App\Model\DTO\ProductDTO;
 use App\Model\Product\ProductRepository;
@@ -13,7 +14,7 @@ class AdminController implements ControllerInterface
 {
     private View $view;
     private ProductRepository $productRepository;
-
+    public Redirector $redirector;
     public function __construct(Container $container)
     {
         $this->view = $container->get(View::class);
@@ -22,15 +23,14 @@ class AdminController implements ControllerInterface
 
     public function load(): void
     {
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
-            header('Location: /?page=login');
+        if (!isset($_SESSION['user'])) {
+            $this->redirector->redirectTo('/?page=login');
             exit;
         }
 
         if (isset($_GET['action']) && $_GET['action'] === 'delete') {
             $this->productRepository->deleteProduct((int)($_GET['id'] ?? 0));
-
-            header('Location: /?page=admin');
+            $this->redirector->redirectTo('/?page=admin');
             exit;
         }
 

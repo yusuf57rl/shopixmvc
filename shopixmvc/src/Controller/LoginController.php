@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Core\Container;
+use App\Core\Redirector;
 use App\Core\View;
 use App\Model\DTO\UserDTO;
 use App\Model\User\UserRepository;
@@ -12,15 +13,17 @@ class LoginController implements ControllerInterface
 {
     private View $view;
     private UserRepository $userRepository;
-
+    public Redirector $redirector;
     public function __construct(Container $container)
     {
+        $this->redirector = new Redirector();
         $this->view = $container->get(View::class);
         $this->userRepository = $container->get(UserRepository::class);
     }
 
     public function load(): void
     {
+        $errors = [];
         $this->view->setTemplate('Login.tpl');
 
         if(isset($_POST['login'])) {
@@ -30,17 +33,16 @@ class LoginController implements ControllerInterface
             $userDTO = $this->userRepository->getUserByUsername($user);
 
             if (!$userDTO instanceof UserDTO) {
-                //TODO error
+                $errors[] = 'USERDTO ERROR';
             }
 
             if (password_verify($password, $userDTO->getPassword())) {
-                //TODO error
+                $errors[] = 'Password falsch!';
             }
 
-            $_SESSION['user']['role'] = 'admin';
             $_SESSION['user']['name'] = $user;
 
-            header('Location: ?page=admin');
+            $this->redirector->redirectTo('/?page=admin');
         }
     }
 

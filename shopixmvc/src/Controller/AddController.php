@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Core\Container;
+use App\Core\Redirector;
 use App\Core\View;
 use App\Model\Category\CategoryMapper;
 use App\Model\Category\CategoryRepository;
@@ -15,18 +16,20 @@ class AddController implements ControllerInterface
     private View $view;
     private ProductRepository $productRepository;
     private CategoryRepository $categoryRepository;
+    public Redirector $redirector;
 
     public function __construct(Container $container)
     {
         $this->view = $container->get(View::class);
         $this->productRepository = $container->get(ProductRepository::class);
         $this->categoryRepository = $container->get(CategoryRepository::class);
+        $this->redirector = $container->get(Redirector::class);
     }
 
     public function load(): void
     {
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
-            header('Location: /?page=login');
+        if (!isset($_SESSION['user'])) {
+            $this->redirector->redirectTo('/?page=login');
             exit;
         }
 
@@ -40,7 +43,7 @@ class AddController implements ControllerInterface
 
         if (isset($_POST['add'])) {
             $this->productRepository->createProduct($product);
-            header('Location: /?page=admin');
+            $this->redirector->redirectTo('/?page=admin');
         }
 
         $this->view->addTemplateParameter('product', $product);

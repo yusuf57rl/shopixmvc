@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Core\DatabaseConnection;
 use PHPUnit\Framework\TestCase;
 use App\Model\User\UserRepository;
 
@@ -14,13 +15,14 @@ class UserRepositoryTest extends TestCase
         $pdo = new PDO('sqlite::memory:');
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+
+
         $pdo->exec("
             CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY,
                 username TEXT NOT NULL,
                 password TEXT NOT NULL,
                 verification TEXT NOT NULL,
-                rank INTEGER DEFAULT 0
             );
         ");
 
@@ -38,7 +40,7 @@ class UserRepositoryTest extends TestCase
                 username TEXT NOT NULL,
                 password TEXT NOT NULL,
                 verification TEXT NOT NULL,
-                rank INTEGER DEFAULT 0
+        
             );
         ");
 

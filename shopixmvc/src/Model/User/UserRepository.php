@@ -51,7 +51,6 @@ class UserRepository
         $statement->bindValue(':username', $user->getUsername(), \PDO::PARAM_STR);
         $statement->bindValue(':password', $user->getPassword(), \PDO::PARAM_STR);
         $statement->bindValue(':verification', $user->getVerification(), \PDO::PARAM_STR);
-        $statement->bindValue(':rank', $user->getRank(), \PDO::PARAM_STR);
         $statement->execute();
     }
 
@@ -61,7 +60,6 @@ class UserRepository
         $statement->bindValue(':username', $user->getUsername(), \PDO::PARAM_STR);
         $statement->bindValue(':password', $user->getPassword(), \PDO::PARAM_STR);
         $statement->bindValue(':verification', $user->getVerification(), \PDO::PARAM_STR);
-        $statement->bindValue(':rank', $user->getRank(), \PDO::PARAM_STR);
         $statement->bindValue(':id', $user->getId(), \PDO::PARAM_INT);
         $statement->execute();
     }
