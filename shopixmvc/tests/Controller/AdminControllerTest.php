@@ -11,6 +11,7 @@ use App\Model\DTO\ProductDTO;
 use App\Model\Product\ProductMapper;
 use App\Model\Product\ProductRepository;
 use PHPUnit\Framework\TestCase;
+use App\Core\Redirector;
 
 class AdminControllerTest extends TestCase
 {
@@ -59,4 +60,50 @@ class AdminControllerTest extends TestCase
 
         $this->assertEquals($productDTO, $updatedProduct);
     }
+    public function testLoadRedirectsWhenUserNotInSession(): void
+    {
+        unset($_SESSION['user']);
+
+        $this->redirector->expects($this->once())
+            ->method('redirectTo')
+            ->with('/?page=login');
+
+        $this->adminController->load();
+    }
+
+    public function testLoadSetsProductsWhenUserInSessionAndActionIsNotDelete(): void
+    {
+        // Setzen Sie die Session und GET-Variablen
+        $_SESSION['user'] = 'testUser';
+        $_GET['action'] = 'someOtherAction';
+
+        $this->adminController->load();
+
+        // Überprüfen Sie, ob das Template korrekt gesetzt ist
+        $template = $this->container->get(View::class)->getTemplate();
+        $this->assertEquals('Admin.tpl', $template);
+
+        // Überprüfen Sie, ob die Produkte korrekt abgerufen wurden
+        $products = $this->container->get(ProductRepository::class)->findAll();
+        $this->assertNotEmpty($products);
+
+        // Überprüfen Sie, ob die Produkte dem View-Objekt hinzugefügt wurden
+        $viewProducts = $this->container->get(View::class)->getTemplateParameters()['products'];
+        $this->assertEquals($products, $viewProducts);
+    }
+
+
+    public function testLoadRedirectsWhenActionIsDelete(): void
+    {
+        $_SESSION['user'] = 'testUser';
+        $_GET['action'] = 'delete';
+        $_GET['id'] = '1';
+
+        $this->redirector->expects($this->once())
+            ->method('redirectTo')
+            ->with('/?page=admin');
+
+        $this->adminController->load();
+    }
+
 }

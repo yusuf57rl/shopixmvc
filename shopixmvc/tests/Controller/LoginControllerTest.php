@@ -17,21 +17,30 @@ class LoginControllerTest extends TestCase
     private Container $container;
     private View $view;
     private UserRepository $userRepository;
+    private Redirector $redirector;
 
     public function setUp(): void
     {
-        $this->view = $this->createMock(View::class);
+        ob_start();
+
+        $this->view = $this->getMockBuilder(View::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['setTemplate', 'assign'])
+            ->getMock();
+        $this->view->method('assign')->willReturn($this->view);
+
         $this->userRepository = $this->createMock(UserRepository::class);
+        $this->redirector = $this->createMock(Redirector::class);
+        $this->redirector->expects($this->once())->method('redirectTo');
 
         $this->container = new Container();
         $this->container->set(View::class, $this->view);
         $this->container->set(UserRepository::class, $this->userRepository);
-        $this->redirector = new Redirector();
         $this->container->set(Redirector::class, $this->redirector);
         $this->loginController = new LoginController($this->container);
     }
 
-    /**
+/**
      * @runInSeparateProcess
      */
     public function testLoad(): void
@@ -50,31 +59,16 @@ class LoginControllerTest extends TestCase
         $_POST['username'] = $username;
         $_POST['password'] = $password;
 
+        $this->view->expects($this->once())
+            ->method('setTemplate')
+            ->with('Login.tpl');
+
         $this->loginController->load();
 
         $this->assertArrayHasKey('user', $_SESSION);
         $this->assertEquals($username, $_SESSION['user']['name']);
-
-        $wrongPassword = 'wrong-password';
-        $_POST['password'] = $wrongPassword;
-
-        ob_start();
-        $this->loginController->load();
-        $output = ob_get_clean();
-
-        $this->assertStringContainsString('Password falsch!', $output);
-
-        $nonExistentUsername = 'nonexistent';
-        $_POST['username'] = $nonExistentUsername;
-
-        $this->userRepository->method('getUserByUsername')->willReturn(null);
-
-        ob_start();
-        $this->loginController->load();
-        $output = ob_get_clean();
-
-        $this->assertStringContainsString('USERDTO ERROR', $output);
     }
+
     public function testLoad_LoginNotSet(): void
     {
         $this->view->expects($this->once())
@@ -84,51 +78,29 @@ class LoginControllerTest extends TestCase
         $this->loginController->load();
     }
 
-    public function testLoad_InvalidUserDTO(): void
-    {
-        $_POST['login'] = true;
-        $_POST['username'] = 'nonexistent';
-        $_POST['password'] = 'password';
-
-        $this->userRepository->method('getUserByUsername')->willReturn(null);
-
-        $this->view->expects($this->once())
-            ->method('setTemplate')
-            ->with('Login.tpl');
-
-        ob_start();
-        $this->loginController->load();
-        $output = ob_get_clean();
-
-        $this->assertStringContainsString('USERDTO ERROR', $output);
-    }
-
     public function testLoad_WrongPassword(): void
     {
-        $username = 'test';
-        $password = '123456';
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $_POST['login'] = true;
+        $_POST['username'] = 'existingUser';
+        $_POST['password'] = 'wrongPassword';
 
         $userDTO = new UserDTO();
-        $userDTO->setUsername($username);
-        $userDTO->setPassword($hashedPassword);
+        $userDTO->setPassword(password_hash('correctPassword', PASSWORD_DEFAULT));
 
         $this->userRepository->method('getUserByUsername')->willReturn($userDTO);
 
-        $_POST['login'] = true;
-        $_POST['username'] = $username;
-        $_POST['password'] = 'wrong-password';
-
         $this->view->expects($this->once())
             ->method('setTemplate')
             ->with('Login.tpl');
 
-        ob_start();
-        $this->loginController->load();
-        $output = ob_get_clean();
+        $this->view->expects($this->once())
+            ->method('assign')
+            ->with('errors', ['Password falsch!']);
 
-        $this->assertStringContainsString('Password falsch!', $output);
+        $this->loginController->load();
     }
+
+
     public function testValidateUserCredentials_ValidUser(): void
     {
         $username = 'test';
@@ -145,6 +117,91 @@ class LoginControllerTest extends TestCase
 
         $this->assertTrue($result);
     }
+    public function testNonexistentUser(): void
+    {
+        $username = 'nonexistentUser';
+        $password = 'password';
+
+        $this->userRepository->method('getUserByUsername')->willReturn(null);
+
+        $result = $this->loginController->validateUserCredentials($username, $password);
+
+        $this->assertFalse($result);
+    }
+
+    public function testLoad_LoginSetButUsernameOrPasswordNotSet(): void
+    {
+        $_POST['login'] = true;
+        $_POST['username'] = ''; // empty username
+        $_POST['password'] = 'password'; // non-empty password
+
+        $this->view->expects($this->once())
+            ->method('setTemplate')
+            ->with('Login.tpl');
+
+        $this->view->expects($this->once())
+            ->method('assign')
+            ->with('errors', ['USERDTO ERROR']);
+
+        $this->loginController->load();
+    }
+
+    public function testLoad_LoginSetButPasswordNotSet(): void
+    {
+        $_POST['login'] = true;
+        $_POST['username'] = 'username'; // non-empty username
+        $_POST['password'] = ''; // empty password
+
+        $this->view->expects($this->once())
+            ->method('setTemplate')
+            ->with('Login.tpl');
+
+        $this->view->expects($this->once())
+            ->method('assign')
+            ->with('errors', ['USERDTO ERROR']);
+
+        $this->loginController->load();
+    }
+
+
+    public function testLoad_InvalidUserDTO(): void
+    {
+        $_POST['login'] = true;
+        $_POST['username'] = 'nonexistent';
+        $_POST['password'] = 'password';
+
+        $this->userRepository->method('getUserByUsername')->willReturn(null);
+
+        $this->view->expects($this->once())
+            ->method('setTemplate')
+            ->with('Login.tpl');
+
+        $this->view->expects($this->once())
+            ->method('assign')
+            ->with('errors', ['USERDTO ERROR']);
+
+        $this->loginController->load();
+    }
+
+    public function testLoad_InvalidUser(): void
+    {
+        $_POST['login'] = true;
+        $_POST['username'] = 'nonexistent';
+        $_POST['password'] = 'password';
+
+        $this->userRepository->method('getUserByUsername')->willReturn(null);
+
+        $this->view->expects($this->once())
+            ->method('setTemplate')
+            ->with('Login.tpl');
+
+        $this->view->expects($this->once())
+            ->method('assign')
+            ->with('errors', ['USERDTO ERROR']);
+
+        $this->loginController->load();
+    }
+
 
     public function testValidateUserCredentials_InvalidPassword(): void
     {
@@ -161,6 +218,36 @@ class LoginControllerTest extends TestCase
         $result = $this->loginController->validateUserCredentials($username, 'wrong-password');
 
         $this->assertFalse($result);
+    }
+
+    public function testLoad_SuccessfulLogin(): void
+    {
+        $_POST['login'] = true;
+        $_POST['username'] = 'existingUser';
+        $_POST['password'] = 'correctPassword';
+
+        $userDTO = new UserDTO();
+        $userDTO->setPassword(password_hash('correctPassword', PASSWORD_DEFAULT));
+
+        $this->userRepository->method('getUserByUsername')->willReturn($userDTO);
+
+        $this->view->expects($this->once())
+            ->method('setTemplate')
+            ->with('Login.tpl');
+
+        $this->loginController->redirector->expects($this->once())
+            ->method('redirectTo')
+            ->with('/?page=admin');
+
+        $this->loginController->load();
+    }
+
+
+
+
+    protected function tearDown(): void
+    {
+        ob_end_clean();
     }
 
 }

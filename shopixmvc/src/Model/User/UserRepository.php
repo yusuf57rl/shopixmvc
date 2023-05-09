@@ -47,19 +47,17 @@ class UserRepository
 
     public function createUser(UserDTO $user): void
     {
-        $statement = $this->PDO->prepare('INSERT INTO users (username, password, verification, rank) VALUES (:username, :password, :verification, :rank)');
+        $statement = $this->PDO->prepare('INSERT INTO users (username, password) VALUES (:username, :password)');
         $statement->bindValue(':username', $user->getUsername(), \PDO::PARAM_STR);
         $statement->bindValue(':password', $user->getPassword(), \PDO::PARAM_STR);
-        $statement->bindValue(':verification', $user->getVerification(), \PDO::PARAM_STR);
         $statement->execute();
     }
 
     public function updateUser(UserDTO $user): void
     {
-        $statement = $this->PDO->prepare('UPDATE users SET username = :username, password = :password, verification = :verification, rank = :rank WHERE id = :id');
+        $statement = $this->PDO->prepare('UPDATE users SET username = :username, password = :password WHERE id = :id');
         $statement->bindValue(':username', $user->getUsername(), \PDO::PARAM_STR);
         $statement->bindValue(':password', $user->getPassword(), \PDO::PARAM_STR);
-        $statement->bindValue(':verification', $user->getVerification(), \PDO::PARAM_STR);
         $statement->bindValue(':id', $user->getId(), \PDO::PARAM_INT);
         $statement->execute();
     }

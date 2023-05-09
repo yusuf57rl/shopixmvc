@@ -8,7 +8,7 @@ use App\Core\DatabaseConnection;
 
 class DatabaseConnectionTest extends TestCase
 {
-    private $databaseConnection;
+    private DatabaseConnection $databaseConnection;
 
     protected function setUp(): void
     {
@@ -28,6 +28,23 @@ class DatabaseConnectionTest extends TestCase
 
         $this->expectException(\PDOException::class);
         $this->databaseConnection->getConnection();
+    }
+
+    public function testCanConnectToInMemorySqlite()
+    {
+        $this->databaseConnection = new DatabaseConnection(testing: true);
+        $connection = $this->databaseConnection->getConnection();
+        $this->assertInstanceOf(\PDO::class, $connection);
+        $this->assertEquals('sqlite', $connection->getAttribute(\PDO::ATTR_DRIVER_NAME));
+    }
+
+    public function testCanCloseConnection()
+    {
+        $connection = $this->databaseConnection->getConnection();
+        $this->assertInstanceOf(\PDO::class, $connection);
+
+        $this->databaseConnection->closeConnection($connection);
+        $this->assertNull($connection);
     }
 
     protected function tearDown(): void

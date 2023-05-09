@@ -30,7 +30,7 @@ class AddController implements ControllerInterface
     {
         if (!isset($_SESSION['user'])) {
             $this->redirector->redirectTo('/?page=login');
-            exit;
+            return;
         }
 
         $product = new ProductDTO();
@@ -39,7 +39,7 @@ class AddController implements ControllerInterface
         $product->setName($_POST['name'] ?? '');
         $product->setDescription($_POST['description'] ?? '');
         $product->setPrice((float)($_POST['price'] ?? 0.0));
-        $product->setCategoryid(($_POST['categoryid'] ?? 0));
+        $product->setCategoryid(($_POST['categoryId'] ?? 0));
 
         if (isset($_POST['add'])) {
             $this->productRepository->createProduct($product);

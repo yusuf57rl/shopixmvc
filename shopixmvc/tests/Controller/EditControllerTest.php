@@ -131,7 +131,11 @@ class EditControllerTest extends TestCase
         $this->productRepository->expects($this->once())
             ->method('findByProductId')
             ->with($this->equalTo(1))
-            ->willReturn($productMock);
+            ->willReturn($productMock)
+            ->willReturnCallback(function () use ($productMock) {
+            return $productMock;
+          });
+
         $this->productRepository->expects($this->once())
             ->method('updateProduct')
             ->with($this->equalTo($productMock));

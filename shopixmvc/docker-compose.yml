@@ -6,3 +6,10 @@ services:
       MYSQL_ROOT_PASSWORD: nexus123
     ports:
       - '3336:3306'
+
+  test_database:
+    image: 'mysql:8'
+    environment:
+      MYSQL_ROOT_PASSWORD: nexus123
+    ports:
+      - '3337:3306'

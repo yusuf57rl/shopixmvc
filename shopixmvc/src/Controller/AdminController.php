@@ -25,13 +25,13 @@ class AdminController implements ControllerInterface
     {
         if (!isset($_SESSION['user'])) {
             $this->redirector->redirectTo('/?page=login');
-            exit;
+            return;
         }
 
         if (isset($_GET['action']) && $_GET['action'] === 'delete') {
             $this->productRepository->deleteProduct((int)($_GET['id'] ?? 0));
             $this->redirector->redirectTo('/?page=admin');
-            exit;
+            return;
         }
 
         $products = $this->productRepository->findAll();

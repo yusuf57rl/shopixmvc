@@ -49,8 +49,8 @@
             <h1 class="jumbotron-heading">ShopixMVC</h1>
             <p class="lead text-muted">Shopsystem by Y.S</p>
             <p>
-                <a href="/login" class="btn btn-primary my-2">Sign in</a>
-                <a href="index.php" class="btn btn-secondary my-2">Register</a><br>
+                <a href="/?page=login" class="btn btn-primary my-2">Sign in</a>
+                <a href="/?page=register" class="btn btn-secondary my-2">Register</a><br>
                 <a href="index.php" class="btn btn-primary my-2">Refresh</a>
                 <a href="#" onclick="history.back()" class="btn btn-secondary my-2">Back</a>
             </p>

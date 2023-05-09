@@ -5,6 +5,7 @@ namespace App\Core;
 
 use JetBrains\PhpStorm\NoReturn;
 
+
 class Redirector
 {
     #[NoReturn]

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.0, created on 2023-02-21 09:49:12
+/* Smarty version 4.3.0, created on 2023-05-09 14:10:35
   from '/home/yusuf/PhpstormProjects/shopixmvc/shopixmvc/template/HomeView.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.0',
-  'unifunc' => 'content_63f48588a73185_78637398',
+  'unifunc' => 'content_645a383b3e3da8_71060794',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '3794d743fb8ec4f8b3ea5b181026a97bc27ceb36' => 
     array (
       0 => '/home/yusuf/PhpstormProjects/shopixmvc/shopixmvc/template/HomeView.tpl',
-      1 => 1676969350,
+      1 => 1683632199,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_63f48588a73185_78637398 (Smarty_Internal_Template $_smarty_tpl) {
+function content_645a383b3e3da8_71060794 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -72,8 +72,8 @@ function content_63f48588a73185_78637398 (Smarty_Internal_Template $_smarty_tpl)
             <h1 class="jumbotron-heading">ShopixMVC</h1>
             <p class="lead text-muted">Shopsystem by Y.S</p>
             <p>
-                <a href="/login" class="btn btn-primary my-2">Sign in</a>
-                <a href="index.php" class="btn btn-secondary my-2">Register</a><br>
+                <a href="/?page=login" class="btn btn-primary my-2">Sign in</a>
+                <a href="/?page=register" class="btn btn-secondary my-2">Register</a><br>
                 <a href="index.php" class="btn btn-primary my-2">Refresh</a>
                 <a href="#" onclick="history.back()" class="btn btn-secondary my-2">Back</a>
             </p>

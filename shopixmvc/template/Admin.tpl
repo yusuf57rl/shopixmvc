@@ -47,7 +47,7 @@
             <h1 class="jumbotron-heading">ShopixMVC - Admin</h1>
             <p class="lead text-muted">Adminbereich des Shopsystems by Y.S</p>
             <p>
-                <a href="#" onclick="window.location.reload()" class="btn btn-primary my-2">Refresh</a>
+                <a href="/?page=logout" class="btn btn-danger my-2">Logout</a>
                 <a href="#" onclick="history.back()" class="btn btn-secondary my-2">Back</a>
             </p>
         </div>

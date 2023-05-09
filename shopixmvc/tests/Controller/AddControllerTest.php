@@ -48,22 +48,52 @@ class AddControllerTest extends TestCase
         $this->container->set(Redirector::class, $this->redirector);
 
         $this->addController = new AddController($this->container);
+        $_SESSION['user'] = 'testUser';
+
+    }
+    public function testRedirectWhenSessionNotSet(): void
+    {
+        $this->redirector->expects($this->once())
+            ->method('redirectTo')
+            ->with($this->anything());
+
+        $this->addController->load();
     }
 
-    protected function tearDown(): void
+    public function testLoadRedirectsWhenUserNotInSession(): void
     {
-        parent::tearDown();
-        $this->PDO->prepare('DELETE FROM products WHERE price = 666.66')->execute();
+        unset($_SESSION['user']);
+
+        $this->redirector->expects($this->once())
+            ->method('redirectTo')
+            ->with('/?page=login');
+
+        $this->addController->load();
+    }
+
+
+    public function testLoadWhenSessionSetButNoPostData(): void
+    {
+        $_SESSION['user'] = 'testUser';
+
+        $this->redirector->expects($this->never())
+            ->method('redirectTo');
+
+        $this->addController->load();
+
+
+        $template = $this->container->get(View::class)->getTemplate();
+        $this->assertEquals('AddProduct.tpl', $template);
     }
 
     public function testAdd(): void
     {
         ob_start();
         $productCreated = false;
-        $_POST['name'] = 'test123';
+        $_POST['name'] = 'test1234';
         $_POST['description'] = 'test';
-        $_POST['price'] = '666.66';
-        $_POST['categoryId'] = '0';
+        $_POST['price'] = 666.66;
+        $_POST['categoryId'] = 0;
 
         $_POST['add'] = true;
 
@@ -85,4 +115,11 @@ class AddControllerTest extends TestCase
         $this->assertTrue($productCreated, 'Product was not created.');
         ob_end_flush();
     }
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        $this->PDO->prepare('DELETE FROM products WHERE price = 666.66')->execute();
+        unset($_SESSION['user']);
+    }
+
 }
