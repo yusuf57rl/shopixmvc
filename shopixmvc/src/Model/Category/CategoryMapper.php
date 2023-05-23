@@ -12,7 +12,7 @@ class CategoryMapper
     {
         $categoryDTO = new CategoryDTO();
 
-        $categoryDTO->setId($category['ID']);
+        $categoryDTO->setId($category['id']);
         $categoryDTO->setName($category['name']);
         $categoryDTO->setDesignation($category['desgination']);
 

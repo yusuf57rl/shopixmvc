@@ -23,6 +23,11 @@ class View
         return $this->params[$key];
     }
 
+    public function getTemplateParameters(): array
+    {
+        return $this->params;
+    }
+
     public function setTemplate(string $template): void
     {
         if(!str_contains($template, '.tpl')) {

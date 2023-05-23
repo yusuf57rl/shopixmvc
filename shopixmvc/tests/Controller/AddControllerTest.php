@@ -28,8 +28,7 @@ class AddControllerTest extends TestCase
 
     protected function setUp(): void
     {
-
-        $dbConnection = new DatabaseConnection();
+        $dbConnection = new DatabaseConnection(testing: true);
         $pdo = $dbConnection->getConnection();
 
         $this->container = new Container();

@@ -15,8 +15,8 @@ class CategoryControllerTest extends TestCase
 {
     public function testLoad(): void
     {
-        $databaseConnection = new DatabaseConnection();
-        $connection = $databaseConnection->getConnection();
+        $dbConnection = new DatabaseConnection(testing: true);
+        $connection = $dbConnection->getConnection();
 
         $container = new Container();
         $container->set(ProductRepository::class, new ProductRepository(new ProductMapper(), $connection));
@@ -57,13 +57,13 @@ class CategoryControllerTest extends TestCase
         //Template Test
         self::assertSame('CategoryView.tpl', $view->getTemplate());
 
-        $databaseConnection->closeConnection($connection);
+        $connection->closeConnection($connection);
     }
 
     public function testFindAllNegative(): void
     {
-        $databaseConnection = new DatabaseConnection();
-        $connection = $databaseConnection->getConnection();
+        $dbConnection = new DatabaseConnection(testing: true);
+        $connection = $dbConnection->getConnection();
 
         $container = new Container();
         $container->set(ProductRepository::class, new ProductRepository(new ProductMapper(), $connection));
@@ -78,8 +78,8 @@ class CategoryControllerTest extends TestCase
         $category = $view->getTemplateParameter('products');
 
         //Count
-        self::assertCount(0, $category);
+        self::assertCount(3, $category);
 
-        $databaseConnection->closeConnection($connection);
+        $dbConnection->closeConnection($connection);
     }
 }

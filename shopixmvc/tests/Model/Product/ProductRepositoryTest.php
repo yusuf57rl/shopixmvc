@@ -12,7 +12,8 @@ class ProductRepositoryTest extends TestCase
 {
     public function testFindAll(): void
     {
-        $pdo = (new DatabaseConnection())->getConnection();
+        $databaseConnection = new DatabaseConnection(testing: true);
+        $pdo = $databaseConnection->getConnection();
 
         $productList = new ProductRepository(new ProductMapper(), $pdo);
         $productList = $productList->findAll();

@@ -127,14 +127,11 @@ class EditControllerTest extends TestCase
         $_POST['description'] = 'Updated Description';
         $_POST['price'] = '99.99';
 
-        $productMock = $this->createMock(ProductRepository::class);
+        $productMock = $this->createMock(ProductDTO::class);
         $this->productRepository->expects($this->once())
             ->method('findByProductId')
             ->with($this->equalTo(1))
-            ->willReturn($productMock)
-            ->willReturnCallback(function () use ($productMock) {
-            return $productMock;
-          });
+            ->willReturn($productMock);
 
         $this->productRepository->expects($this->once())
             ->method('updateProduct')

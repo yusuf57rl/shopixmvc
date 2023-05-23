@@ -15,8 +15,8 @@ class CategoriesControllerTest extends TestCase
 {
     public function testLoad(): void
     {
-        $databaseConnection = new DatabaseConnection();
-        $connection = $databaseConnection->getConnection();
+        $dbConnection = new DatabaseConnection(testing: true);
+        $connection = $dbConnection->getConnection();
 
         $container = new Container();
         $container->set(CategoryRepository::class, new CategoryRepository(new CategoryMapper(), $connection));
@@ -49,6 +49,6 @@ class CategoriesControllerTest extends TestCase
         // Template Test
         self::assertSame('HomeView.tpl', $view->getTemplate());
 
-        $databaseConnection->closeConnection($connection);
+        $dbConnection->closeConnection($connection);
     }
 }

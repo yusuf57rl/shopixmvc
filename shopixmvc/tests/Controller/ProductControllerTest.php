@@ -15,15 +15,15 @@ class ProductControllerTest extends TestCase
 {
     public function testLoad(): void
     {
-        $databaseConnection = new DatabaseConnection();
-        $connection = $databaseConnection->getConnection();
+        $dbConnection = new DatabaseConnection(testing: true);
+        $connection = $dbConnection->getConnection();
 
         $container = new Container();
         $container->set(ProductRepository::class, new ProductRepository(new ProductMapper(), $connection));
 
         $view = new View(new \Smarty());
 
-        $_GET["id"] = "1";
+        $_GET["id"] = 1;
         $container->set(View::class, $view);
         $productController = new ProductController($container);
         $productController->load();
@@ -38,6 +38,13 @@ class ProductControllerTest extends TestCase
 
         self::assertSame('ProductView.tpl', $view->getTemplate());
 
-        $databaseConnection->closeConnection($connection);
+        $dbConnection->closeConnection($connection);
     }
+    protected function tearDown(): void
+    {
+        $dbConnection = new DatabaseConnection(testing: true);
+        $connection = $dbConnection->getConnection();
+        $connection->exec("DELETE FROM products WHERE price = 666.66");
+    }
+
 }

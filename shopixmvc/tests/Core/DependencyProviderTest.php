@@ -19,7 +19,7 @@ class DependencyProviderTest extends TestCase
     {
         $container = new Container();
 
-        $databaseConnection = new DatabaseConnection();
+        $databaseConnection = new DatabaseConnection(testing: true);
         $connection = $databaseConnection->getConnection();
 
         $smarty = new \Smarty();

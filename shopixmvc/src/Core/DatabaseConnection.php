@@ -9,28 +9,33 @@ use PDOException;
 class DatabaseConnection
 {
     public function __construct(
-        private $host = "localhost",
+        private $host = "127.0.0.1",
+        private $port = 3306,
         private $username = "root",
         private $password = "nexus123",
         private $database = "shopixmvc",
         private $testing = false,
     )
     {
-        if ($this->testing) {
+        if ($this->testing = true) {
+            $this->host = "127.0.0.1";
             $this->database = "shopixmvc_test";
+            $this->username = "root";
+            $this->password = "nexus123";
+            $this->port = 3206;
         }
     }
 
     public function getConnection(): PDO
     {
-        if ($this->testing) {
-            $conn = new PDO('sqlite::memory:');
+        try {
+            $conn = new PDO("mysql:host=" . $this->host . ";port=" . $this->port . ";dbname=" . $this->database, $this->username, $this->password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } else {
-            $conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->database, $this->username, $this->password);
+            return $conn;
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+            die();
         }
-
-        return $conn;
     }
 
     public function closeConnection(PDO $connection): void

@@ -8,7 +8,7 @@ use App\Core\DatabaseConnection;
 
 class DatabaseConnectionTest extends TestCase
 {
-    private DatabaseConnection $databaseConnection;
+    private ?DatabaseConnection $databaseConnection = null;
 
     protected function setUp(): void
     {

@@ -10,8 +10,8 @@ use App\Model\User\UserRepository;
 
 class UserRepositoryTest extends TestCase
 {
-    private UserRepository $userRepository;
-    private PDO $pdo;
+    private ?UserRepository $userRepository;
+    private ?PDO $pdo;
 
     protected function setUp(): void
     {
@@ -63,7 +63,6 @@ class UserRepositoryTest extends TestCase
 
         $id = (int) $this->pdo->lastInsertId();
 
-        // Rufen Sie den Benutzer anhand seines Benutzernamens ab und überprüfen Sie, ob die Ergebnisse korrekt sind.
         $user = $this->userRepository->getUserByUsername($username);
         $this->assertInstanceOf(UserDTO::class, $user);
         $this->assertEquals($id, $user->getId());
@@ -79,10 +78,10 @@ class UserRepositoryTest extends TestCase
 
     public function testCreateUser(): void
     {
-        // Erstellen Sie ein UserDTO Objekt
+
         $username = 'newUser';
         $password = password_hash('newPassword', PASSWORD_DEFAULT);
-        $verification = 'newPassword'; // benutzen wir um das Passwort zu bestätigen
+        $verification = 'newPassword';
 
         $userDTO = new UserDTO();
         $userDTO->setUsername($username);
@@ -131,7 +130,6 @@ class UserRepositoryTest extends TestCase
 
     public function testDeleteUser(): void
     {
-        // Erstellen Sie einen Benutzer in der Datenbank
         $username = 'testuser';
         $password = password_hash('testpassword', PASSWORD_DEFAULT);
 
@@ -145,7 +143,6 @@ class UserRepositoryTest extends TestCase
 
         $this->userRepository->deleteUser($id);
 
-        // Überprüfen Sie, ob der Benutzer aus der Datenbank gelöscht wurde.
         $deletedUser = $this->userRepository->getUserById($id);
         $this->assertNull($deletedUser);
     }
