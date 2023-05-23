@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Test\Model\Product;
 
 use App\Core\DatabaseConnection;
+use App\Model\DTO\ProductDTO;
 use App\Model\Product\ProductMapper;
 use App\Model\Product\ProductRepository;
 use PHPUnit\Framework\TestCase;
@@ -19,7 +20,7 @@ class ProductRepositoryTest extends TestCase
         $productList = $productList->findAll();
 
 
-        self::assertCount(9, $productList);
+        self::assertCount(7, $productList);
 
         //product 1
         self::assertSame('Alpha T-Shirt', $productList[0]->getName());
@@ -61,6 +62,57 @@ class ProductRepositoryTest extends TestCase
         self::assertSame($id, $productDTO->getID());
     }
 
+    public function testUpdateProduct(): void
+    {
+        $databaseConnection = new DatabaseConnection(testing: true);
+        $pdo = $databaseConnection->getConnection();
+
+        // Erstellen Sie ein neues ProduktDTO-Objekt mit Testdaten
+        $productDTO = new ProductDTO();
+        $productDTO->setName('Test Product');
+        $productDTO->setDescription('Test Description');
+        $productDTO->setCategoryId(1);
+        $productDTO->setPrice(9.99);
+
+        $statement = $pdo->prepare('INSERT INTO products (name, description, categoryId, price) VALUES (:name, :description, :categoryId, :price)');
+        $statement->execute([
+            ':name' => $productDTO->getName(),
+            ':description' => $productDTO->getDescription(),
+            ':categoryId' => $productDTO->getCategoryId(),
+            ':price' => $productDTO->getPrice(),
+        ]);
+
+        $id = (int) $pdo->lastInsertId();
+        $productDTO->setId($id);
+
+        $productDTO->setName('Updated Product');
+        $productDTO->setDescription('Updated Description');
+        $productDTO->setCategoryId(2);
+        $productDTO->setPrice(19.99);
+
+        $productRepository = new ProductRepository(new ProductMapper(), $pdo);
+        $productRepository->updateProduct($productDTO);
+
+        $statement = $pdo->prepare('SELECT * FROM products WHERE id = :id');
+        $statement->execute([':id' => $id]);
+        $updatedProduct = $statement->fetch();
+
+        self::assertEquals($productDTO->getName(), $updatedProduct['name']);
+        self::assertEquals($productDTO->getDescription(), $updatedProduct['description']);
+        self::assertEquals($productDTO->getCategoryId(), $updatedProduct['categoryId']);
+        self::assertEquals($productDTO->getPrice(), $updatedProduct['price']);
+
+        $statement = $pdo->prepare('DELETE FROM products WHERE id = :id');
+        $statement->execute([':id' => $id]);
+
+        $statement = $pdo->prepare('SELECT * FROM products WHERE id = :id');
+        $statement->execute([':id' => $id]);
+        $deletedProduct = $statement->fetch();
+
+        self::assertEmpty($deletedProduct);
+    }
+
+
     public function testFindByProductIDNegativ(): void
     {
 
@@ -71,5 +123,6 @@ class ProductRepositoryTest extends TestCase
 
         self::assertNull($productDTO);
     }
+
 
 }

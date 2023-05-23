@@ -23,12 +23,13 @@ class DatabaseConnectionTest extends TestCase
 
     public function testConnectionError()
     {
-        // RANDOM DATEN
         $this->databaseConnection = new DatabaseConnection('localhost', 'root', 'password', 'nonexistent_database');
 
         $this->expectException(\PDOException::class);
+        $this->expectExceptionMessage('MYSQL[HY000] [1049] Unknown database \'nonexistent_database\'');
         $this->databaseConnection->getConnection();
     }
+
 
     public function testCanConnectToInMemorySqlite()
     {

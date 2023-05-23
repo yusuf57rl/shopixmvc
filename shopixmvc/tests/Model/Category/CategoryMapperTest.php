@@ -12,7 +12,7 @@ class CategoryMapperTest extends TestCase
     public function testMapReturnsCategoryDTO()
     {
         $category = [
-            'ID' => 1,
+            'id' => 1,
             'name' => 'T-Shirt',
             'desgination' => 'Qualitativ hochwertig',
         ];

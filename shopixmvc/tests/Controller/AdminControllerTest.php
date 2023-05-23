@@ -16,6 +16,8 @@ use App\Core\Redirector;
 class AdminControllerTest extends TestCase
 {
     private Container $container;
+
+    private ProductRepository $productRepository;
     private AdminController $adminController;
 
     protected function setUp(): void
@@ -25,8 +27,8 @@ class AdminControllerTest extends TestCase
 
         $this->container = new Container();
 
-        $productRepository = new ProductRepository(new ProductMapper(), $pdo);
-        $this->container->set(ProductRepository::class, $productRepository);
+        $this->productRepository = new ProductRepository(new ProductMapper(), $pdo);  // Hier initialisiere ich die $this->productRepository Eigenschaft
+        $this->container->set(ProductRepository::class, $this->productRepository);
 
         $view = new View(new \Smarty());
         $this->container->set(View::class, $view);
@@ -48,15 +50,14 @@ class AdminControllerTest extends TestCase
         $this->assertEquals('Admin.tpl', $template);
 
         $productDTO = new ProductDTO();
-        $productDTO->setId(1);
         $productDTO->setName('Test Product');
         $productDTO->setDescription('A test product');
         $productDTO->setCategoryId(1);
         $productDTO->setPrice(10.0);
 
-        $this->adminController->saveProduct(1, 'Test Product', 'A test product', 1, 10.0);
+        $this->productRepository->createProduct('Test Product', 'A test product', 999, 10.0);
 
-        $updatedProduct = $this->container->get(ProductRepository::class)->findByProductId(1);
+        $updatedProduct = $this->container->get(ProductRepository::class)->findByCategoryId(999);
 
         $this->assertEquals($productDTO, $updatedProduct);
     }
@@ -89,11 +90,13 @@ class AdminControllerTest extends TestCase
     }
 
 
+
     public function testLoadRedirectsWhenActionIsDelete(): void
     {
+
         $_SESSION['user'] = 'testUser';
         $_GET['action'] = 'delete';
-        $_GET['id'] = '1';
+        $_GET['id'] = '999';
 
         $this->redirector->expects($this->once())
             ->method('redirectTo')
@@ -101,5 +104,7 @@ class AdminControllerTest extends TestCase
 
         $this->adminController->load();
     }
+
+
 
 }

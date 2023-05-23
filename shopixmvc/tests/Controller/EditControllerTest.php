@@ -36,12 +36,6 @@ class EditControllerTest extends TestCase
         $this->editController = new EditController($this->container);
         $this->editController->redirector = $this->redirector;
     }
-    protected function tearDown(): void
-    {
-        $_GET = [];
-        $_POST = [];
-    }
-
 
 
     public function testLoad(): void
@@ -94,19 +88,6 @@ class EditControllerTest extends TestCase
         $this->editController->load();
     }
 
-    public function testLoad_NoProductId(): void
-    {
-        $_SESSION['user'] = ['role' => 'admin'];
-        $_GET['id'] = '0'; // Set $_GET['id'] to '0' instead of an empty string.
-
-        $this->redirector->expects($this->once())
-            ->method('redirectTo')
-            ->with('/?page=admin');
-
-        $this->editController->load();
-    }
-
-
 
     public function testLoadRedirectsToAdminPageWhenProductIdIsEmpty(): void
     {
@@ -142,7 +123,88 @@ class EditControllerTest extends TestCase
             ->method('redirectTo')
             ->with($this->equalTo('/?page=admin'));
     }
+    public function testLoad_NoProductId(): void
+    {
+        $_SESSION['user'] = ['role' => 'admin'];
+        $_GET['id'] = '';
 
+        $this->redirector->expects($this->once())
+            ->method('redirectTo')
+            ->with('/?page=admin');
 
+        $this->editController->load();
+    }
+
+    public function testLoad_ProductDoesNotExist(): void
+    {
+        $_SESSION['user'] = ['role' => 'admin'];
+        $_GET['id'] = '1';
+
+        $this->productRepository->method('findByProductId')->willReturn(null);
+
+        $this->redirector->expects($this->once())
+            ->method('redirectTo')
+            ->with('/?page=admin');
+
+        $this->editController->load();
+    }
+    public function testLoad_UpdateWithoutRequiredPostData(): void
+    {
+        $_SESSION['user'] = ['role' => 'admin'];
+        $_GET['id'] = '1';
+        $_POST['update'] = true;
+        $_POST['name'] = '';
+        $_POST['description'] = 'Updated Description';
+        $_POST['price'] = '99.99';
+
+        $this->productRepository->expects($this->never())
+            ->method('updateProduct');
+
+        $this->editController->load();
+    }
+
+    public function testLoad_UpdateWithInvalidPostData(): void
+    {
+        $_SESSION['user'] = ['role' => 'admin'];
+        $_GET['id'] = '1';
+        $_POST['update'] = true;
+        $_POST['name'] = 'Updated Name';
+        $_POST['description'] = 'Updated Description';
+        $_POST['price'] = 'invalid';
+
+        $this->productRepository->expects($this->never())
+            ->method('updateProduct');
+
+        $this->editController->load();
+    }
+
+    public function testLoad_ProductNotUpdated(): void
+    {
+        $_SESSION['user'] = ['role' => 'admin'];
+        $_GET['id'] = '1';
+        // Do not set $_POST['update'].
+        $_POST['name'] = 'Updated Name';
+        $_POST['description'] = 'Updated Description';
+        $_POST['price'] = '99.99';
+
+        $productMock = $this->createMock(ProductDTO::class);
+        $this->productRepository->expects($this->once())
+            ->method('findByProductId')
+            ->with($this->equalTo(1))
+            ->willReturn($productMock);
+
+        $this->productRepository->expects($this->never())
+            ->method('updateProduct');
+
+        $this->editController->load();
+    }
+
+    protected function tearDown(): void
+    {
+
+        $_SESSION = [];
+        $_GET = [];
+        $_POST = [];
+    }
 
 }

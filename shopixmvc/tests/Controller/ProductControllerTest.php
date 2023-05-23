@@ -40,11 +40,5 @@ class ProductControllerTest extends TestCase
 
         $dbConnection->closeConnection($connection);
     }
-    protected function tearDown(): void
-    {
-        $dbConnection = new DatabaseConnection(testing: true);
-        $connection = $dbConnection->getConnection();
-        $connection->exec("DELETE FROM products WHERE price = 666.66");
-    }
 
 }

@@ -6,7 +6,6 @@ use App\Core\DatabaseConnection;
 use App\Model\DTO\UserDTO;
 use PHPUnit\Framework\TestCase;
 use App\Model\User\UserEntityManager;
-use PDO;
 
 class UserEntityManagerTest extends TestCase
 {

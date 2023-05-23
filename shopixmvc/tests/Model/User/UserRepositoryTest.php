@@ -87,10 +87,8 @@ class UserRepositoryTest extends TestCase
         $userDTO->setUsername($username);
         $userDTO->setPassword($password);
 
-        // Rufen Sie die createUser Funktion auf
         $this->userRepository->createUser($userDTO);
 
-        // Überprüfen Sie, ob der Benutzer korrekt in der Datenbank erstellt wurde
         $createdUser = $this->userRepository->getUserByUsername($username);
         $this->assertEquals($username, $createdUser->getUsername());
         $this->assertTrue(password_verify('newPassword', $createdUser->getPassword()));
@@ -110,7 +108,6 @@ class UserRepositoryTest extends TestCase
 
         $id = (int) $this->pdo->lastInsertId();
 
-        // Aktualisieren Sie den Benutzer und überprüfen Sie, ob die Änderungen korrekt in der Datenbank gespeichert wurden.
         $newUsername = 'updatedUser';
         $newPassword = password_hash('updatedPassword', PASSWORD_DEFAULT);
         $newVerification = 'updatedPassword';
@@ -135,8 +132,8 @@ class UserRepositoryTest extends TestCase
 
         $statement = $this->pdo->prepare('INSERT INTO users (username, password) VALUES (:username, :password)');
         $statement->execute([
-            'username' => $username,
-            'password' => $password,
+            ':username' => $username,
+            ':password' => $password,
         ]);
 
         $id = (int) $this->pdo->lastInsertId();
@@ -150,7 +147,10 @@ class UserRepositoryTest extends TestCase
 
     protected function tearDown(): void
     {
+        $this->pdo->prepare('DELETE FROM users WHERE username = "testuser" OR username = "newUser" OR username = "updatedUser";')->execute();
         $this->userRepository = null;
         $this->pdo = null;
+        parent::tearDown();
     }
+
 }

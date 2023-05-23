@@ -16,6 +16,7 @@ use App\Model\Product\ProductRepository;
 use App\Model\Category\CategoryRepository;
 use JetBrains\PhpStorm\NoReturn;
 use PHPUnit\Framework\TestCase;
+use PDO;
 
 class AddControllerTest extends TestCase
 {
@@ -105,8 +106,8 @@ class AddControllerTest extends TestCase
         $productDTOList = $this->productRepository->findAll();
 
         foreach ($productDTOList as $productDTO) {
-            if($productDTO->getName() === 'test123') {
-                self::assertSame('test123', $productDTO->getName());
+            if($productDTO->getName() === 'test1234') {
+                self::assertSame('test1234', $productDTO->getName());
                 $productCreated = true;
                 break;
             }
@@ -117,7 +118,7 @@ class AddControllerTest extends TestCase
     protected function tearDown(): void
     {
         parent::tearDown();
-        $this->PDO->prepare('DELETE FROM products WHERE price = 666.66')->execute();
+        $this->PDO->prepare('DELETE FROM products WHERE price = 666.66 OR name = "test1234";')->execute();
         unset($_SESSION['user']);
     }
 

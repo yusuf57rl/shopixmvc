@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 
 namespace App\Core;
 
@@ -14,28 +14,20 @@ class DatabaseConnection
         private $username = "root",
         private $password = "nexus123",
         private $database = "shopixmvc",
-        private $testing = false,
+        private bool $testing = false,
     )
     {
-        if ($this->testing = true) {
-            $this->host = "127.0.0.1";
+        if ($this->testing === true) {
             $this->database = "shopixmvc_test";
-            $this->username = "root";
-            $this->password = "nexus123";
             $this->port = 3206;
         }
     }
 
     public function getConnection(): PDO
     {
-        try {
-            $conn = new PDO("mysql:host=" . $this->host . ";port=" . $this->port . ";dbname=" . $this->database, $this->username, $this->password);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $conn;
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-            die();
-        }
+        $conn = new PDO("mysql:host=" . $this->host . ";port=" . $this->port . ";dbname=" . $this->database, $this->username, $this->password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $conn;
     }
 
     public function closeConnection(PDO $connection): void
